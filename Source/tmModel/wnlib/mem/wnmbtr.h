@@ -30,7 +30,7 @@ AUTHOR:
 
 #include "wnlib.h"
 #include "wnmem.h"
-
+#include <sys/types.h>
 
 #define WN_MB_MIN    (-3)
 #define WN_MB_MAX    3
@@ -49,7 +49,7 @@ struct wn_mbtree_struct
 {
   wn_mbhandle handle_tree;
 
-  int (*pcompare_keys_func)(ptr key1,ptr key2);
+  size_t (*pcompare_keys_func)(ptr key1,ptr key2);
 };
 
 /* A free block consists of a size field, always aligned such that its
@@ -82,7 +82,7 @@ struct wn_mbhandle_struct
 
 struct wn_free_block_struct
 {
-  int free_block_size;
+  size_t free_block_size;
 };
 
 #define WN_FREE_BLOCK_TO_MBHANDLE(free_block) \

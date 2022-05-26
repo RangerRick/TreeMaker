@@ -17,7 +17,8 @@ AUTHOR:
 
 
 #include "wnlib.h"
-
+/* [BMR] for size_t */
+#include <stddef.h>
 
 
 #define WN_NO_FREE           0x1
@@ -131,17 +132,17 @@ EXTERN void wn_print_composition_of_big_blocks_free_list(wn_memgp group);
   ** if you want it to work on both 32 bit and sparc64 -ugh */
   
 /*[RJL] put in the case for CW */
+/*[BMR] size_t should be everywhere, newer wnlib uses it */
+/*
 #ifdef __MWERKS__
     typedef void *(*wn_system_memory_alloc_func_type)(unsigned long);
 #elif WN_SIZEOF_PTR == 8
-/*
-# if WN_SIZEOF_PTR == 8
-*/
-/*[\RJL]*/
     typedef void *(*wn_system_memory_alloc_func_type)(unsigned long int);
 # else
     typedef void *(*wn_system_memory_alloc_func_type)(unsigned int);
 # endif
+*/
+  typedef void *(*wn_system_memory_alloc_func_type)(size_t);
   typedef void  (*wn_system_memory_free_func_type)(ptr);
 #if defined(__cplusplus)
   }

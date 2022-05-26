@@ -253,9 +253,6 @@ static void *multiply_vect_by_vect_thread(vect_thread_context tcontext)
 void wn_multiply_vect_by_vect_par(wn_parvect_context context, 
           double *v1, double *v2, int len)
 {
-  int t;
-  double sum = 0;
-
   if (context->num_threads == 1)
   {
     wn_multiply_vect_by_vect(v1, v2, len);
@@ -282,9 +279,6 @@ static void *divide_vect_by_vect_thread(vect_thread_context tcontext)
 void wn_divide_vect_by_vect_par(wn_parvect_context context,
         double *v1, double *v2, int len)
 {
-  int t;
-  double sum = 0;
-
   if (context->num_threads == 1)
   {
     wn_divide_vect_by_vect(v1, v2, len);
@@ -309,8 +303,6 @@ static void *zero_vect_thread(vect_thread_context tcontext)
 
 void wn_zero_vect_par(wn_parvect_context context, double *v1, int len)
 {
-  int t;
-
   if (context->num_threads == 1)
   {
     wn_zero_vect(v1, len);
@@ -336,8 +328,6 @@ static void *copy_vect_thread(vect_thread_context tcontext)
 void wn_copy_vect_par(wn_parvect_context context, double *v1, double *v2,
           int len)
 {
-  int t;
-
   if (context->num_threads == 1)
   {
     wn_copy_vect(v1, v2, len);

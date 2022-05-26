@@ -7197,33 +7197,6 @@ local int hash_int(int i)
 }
 
 
-local void print_state()
-{
-  int i;
-
-  printf("pointer = %d\n",pointer);
-  printf("munge_pointer = %d\n",munge_pointer);
-  printf("{");
-
-  for(i=0;i<BUFFER_SIZE;++i)
-  {
-    if(i > 0)
-    {
-      printf(",");
-    }
-
-    if(i%6 == 5)
-    {
-      printf("\n");
-    }
-
-    printf("0x%lx",state[i]);
-  }
-
-  printf("}\n");
-}
-
-
 void wn_seed_random_number_generator(int seed)
 {
   int i;

@@ -84,18 +84,12 @@ local void insert_into_block_list
 }
 
 
-/* debug count of handle chunks allocated through this routine */
-local int lo_insert_chunks_allocated = 0;
-
 local void lo_insert_free_block_into_big_free_list(wn_free_block free_block,
 /**/                wn_memgp group)
 {
   free_list_type free_list = (free_list_type) group->free_list;
   wn_mbtree tree = free_list->big_blocks_tree;
   wn_mbhandle handle, hdr_handle;
-  int mbhandle_chunk_size;
-  int total_size;
-  wn_free_block free_block_2;
 
   wn_assert(free_block->free_block_size >= SMALL_SIZE);
   wn_assert((((long unsigned int) free_block) & 7) == 4);
@@ -179,7 +173,7 @@ local void get_memory_from_small_blocks
 local void lo_get_free_memory_from_big_blocks
 (
   allocated_block_type *pallocated_block,
-  int size,
+  size_t size,
   wn_memgp group
 )
 {
@@ -249,8 +243,8 @@ local void get_more_memory(int size,wn_memgp group)
 
     free_block = (wn_free_block)(group->block_ptr);
 
-    if(!wn_gp_pad_flag  &&
-    /**/  group->block_mem_left >= WN_SIZEOF_FREE_BLOCK_STRUCT  ||
+    if( ( !wn_gp_pad_flag  &&
+    /**/  group->block_mem_left >= WN_SIZEOF_FREE_BLOCK_STRUCT ) ||
     /**/  group->block_mem_left  >=
     /**/      WN_SIZEOF_FREE_BLOCK_STRUCT + (int) sizeof(struct pad_type_struct))
     {
@@ -585,9 +579,7 @@ local void verify_free_list(wn_memgp group)
 {
   free_list_type free_list;
   int size;
-  wn_mbhandle handle;
   void (*routine_ptr)(wn_mbhandle);
-  long int i;
 
   free_list = (free_list_type)(group->free_list);
 
@@ -677,7 +669,6 @@ long int wn_amount_of_free_memory_in_group(wn_memgp group)
 {
   free_list_type free_list;
   wn_free_block free_block;
-  wn_mbhandle handle;
   long int result = 0;
   long int i;
 
@@ -711,7 +702,6 @@ void wn_print_composition_of_big_blocks_free_list(wn_memgp group)
 {
   free_list_type free_list = (free_list_type) group->free_list;
   wn_free_block free_block;
-  int size, next_size;
   int count_of_this_size;
   wn_mbhandle handle;
   long int i;

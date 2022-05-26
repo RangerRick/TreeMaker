@@ -35,7 +35,7 @@ AUTHOR:
 local void lo_mmkbtree
 (
   wn_mbtree tree,
-  int (*pcompare_keys_func)(ptr key1,ptr key2)
+  size_t (*pcompare_keys_func)(ptr key1,ptr key2)
 )
 {
   tree->handle_tree = NULL;
@@ -62,7 +62,7 @@ local int lo_mptrcmp(ptr p1,ptr p2)
 
 void wn_mmkptrbtree(wn_mbtree tree)
 {
-  lo_mmkbtree(tree, (int (*)(ptr,ptr))(lo_mptrcmp));
+  lo_mmkbtree(tree, (size_t (*)(ptr,ptr))(lo_mptrcmp));
 }
 
 
@@ -169,7 +169,7 @@ local void lo_get_lt_handle
 (
   wn_mbhandle *phandle,
   wn_mbhandle handle_tree,
-  int (*pcompare_keys_func)(ptr key1,ptr key2),
+  size_t (*pcompare_keys_func)(ptr key1,ptr key2),
   ptr key
 )
 {
@@ -201,7 +201,7 @@ local void lo_get_gt_handle
 (
   wn_mbhandle *phandle,
   wn_mbhandle handle_tree,
-  int (*pcompare_keys_func)(ptr key1,ptr key2),
+  size_t (*pcompare_keys_func)(ptr key1,ptr key2),
   ptr key
 )
 {
@@ -233,7 +233,7 @@ local void lo_get_le_handle
 (
   wn_mbhandle *phandle,
   wn_mbhandle handle_tree,
-  int (*pcompare_keys_func)(ptr key1,ptr key2),
+  size_t (*pcompare_keys_func)(ptr key1,ptr key2),
   ptr key
 )
 {
@@ -271,7 +271,7 @@ local void lo_get_ge_handle
 (
   wn_mbhandle *phandle,
   wn_mbhandle handle_tree,
-  int (*pcompare_keys_func)(ptr key1,ptr key2),
+  size_t (*pcompare_keys_func)(ptr key1,ptr key2),
   ptr key
 )
 {
@@ -309,7 +309,7 @@ local void lo_get_equal_handle
 (
   wn_mbhandle *phandle,
   wn_mbhandle handle_tree,
-  int (*pcompare_keys_func)(ptr key1,ptr key2),
+  size_t (*pcompare_keys_func)(ptr key1,ptr key2),
   ptr key
 )
 {
@@ -398,7 +398,7 @@ local void lo_insert_handle_into_tree
 (
   wn_mbhandle handle,
   wn_mbhandle *phandle_tree,
-  int (*pcompare_keys_func)(ptr key1,ptr key2)
+  size_t (*pcompare_keys_func)(ptr key1,ptr key2)
 )
 {
   wn_mbhandle parent;
@@ -906,7 +906,7 @@ local bool lo_range_is_reasonable
 (
   ptr low_key,
   ptr high_key,
-  int (*pcompare_keys_func)(ptr key1,ptr key2)
+  size_t (*pcompare_keys_func)(ptr key1,ptr key2)
 )
 {
   int comparison;
@@ -922,7 +922,7 @@ local int lo_compare_with_range
   ptr key,
   ptr low_key,
   ptr high_key,
-  int (*pcompare_keys_func)(ptr key1,ptr key2)
+  size_t (*pcompare_keys_func)(ptr key1,ptr key2)
 )
 {
   if((*pcompare_keys_func)(key,low_key) < 0)
@@ -946,7 +946,7 @@ local void lo_act_on_handle_tree
   void (*paction)(wn_mbhandle handle),
   ptr low_key,
   ptr high_key,
-  int (*pcompare_keys_func)(ptr key1,ptr key2)
+  size_t (*pcompare_keys_func)(ptr key1,ptr key2)
 )
 {
   int range_comparison;
@@ -1013,7 +1013,7 @@ local void lo_verify_this_handle_tree
 (
   wn_mbhandle handle_tree,
   wn_mbhandle parent,
-  int (*pcompare_keys_func)(ptr key1,ptr key2)
+  size_t (*pcompare_keys_func)(ptr key1,ptr key2)
 )
 {
   int left_count,right_count,left_level,right_level;
@@ -1056,7 +1056,7 @@ local void lo_verify_handle_tree
 (
   wn_mbhandle handle_tree,
   wn_mbhandle parent,
-  int (*pcompare_keys_func)(ptr key1,ptr key2)
+  size_t (*pcompare_keys_func)(ptr key1,ptr key2)
 )
 {
   if(handle_tree == NULL)
@@ -1073,7 +1073,7 @@ local void lo_verify_handle_tree
 
 void wn_mbverify(wn_mbtree tree)
 {
-  wn_assert(tree->pcompare_keys_func != (int (*)(ptr,ptr))NULL);
+  wn_assert(tree->pcompare_keys_func != (size_t (*)(ptr,ptr))NULL);
 
   lo_verify_handle_tree(tree->handle_tree,(wn_mbhandle)NULL,
   /**/            tree->pcompare_keys_func);

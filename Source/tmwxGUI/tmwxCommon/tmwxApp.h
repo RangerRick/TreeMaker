@@ -17,6 +17,8 @@ Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
 // Forward declarations
 #include "tmwxGUI_fwd.h"
 
+#include <wx/wxchar.h>
+
 class wxSingleInstanceChecker;
 class wxDocument;
 class wxBitmap;

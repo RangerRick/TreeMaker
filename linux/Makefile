@@ -43,7 +43,7 @@ ifeq ($(BUILD),debug)
   WX = debug
 else
 ifeq ($(BUILD),devel)
-  CONDFLAGS = -DTMWX -DTMDEBUG -g
+  CONDFLAGS = -DTMWX -DTMDEBUG -g -Wall -Werror
   WX = release
 else
 ifeq ($(BUILD),profile)

@@ -49,22 +49,6 @@ void wn_force_conj_gradient_stop(void)
 }
 
 
-local bool vects_equal(double v1[],double v2[],int len)
-{
-  int i;
-
-  for(i=0;i<len;++i)
-  {
-    if(v1[i] != v2[i])
-    {
-      return(FALSE);
-    }
-  }
-
-  return(TRUE);
-}
-
-
 local bool parabola_fit_improvement_wrong(double y1,double y0,double b,
             double tolerance)
 {
@@ -131,40 +115,6 @@ local double simple_eval_function(double x)
   eval_function(&ret,save_vect,save_direction,x,save_len,save_pfunction);
 
   return(ret);
-}
-
-
-local bool x0_too_far_out(double x0,double x2,double threshold)
-{
-  wn_assert(threshold > 1.0);
-
-  if(x2 > 0.0)
-  {
-    return(x0 > x2*threshold);
-  }
-  else
-  {
-    wn_assert(x2 < 0.0);  /* x2 == 0 not allowed */
-
-    return(x0_too_far_out(-x0,-x2,threshold));
-  }
-}
-
-
-local bool x0_too_far_in(double x0,double x2,double threshold)
-{
-  wn_assert(threshold < 1.0);
-
-  if(x2 > 0.0)
-  {
-    return(x0 < x2*threshold);
-  }
-  else
-  {
-    wn_assert(x2 < 0.0);  /* x0 == 0 not allowed */
-
-    return(x0_too_far_in(-x0,-x2,threshold));
-  }
 }
 
 
@@ -324,7 +274,7 @@ void wn_conj_gradient_method
 {
   int iteration,no_move_count;
   int stable_satisfy_count;
-  double norm2_g,norm2_last_g,g_dot_last_g,val,last_val,numerator,beta,
+  double norm2_g,norm2_last_g,g_dot_last_g,val,last_val,beta,
    jump_len,last_jump_len,alpha;
   double *g,*last_g,*direction;
   bool function_free_method,last_was_function_free_method;
@@ -367,7 +317,6 @@ void wn_conj_gradient_method
     if(function_free_method)
     {
       double x2;
-      int j;
       double g0_dot_d0,g1s_dot_d0,dot_diff;
 
       dy1 = wn_dot_vects(direction,last_g,len);

@@ -168,7 +168,6 @@ local bool is_valid_number(double x)
 
 local int qroot_sign(double x)
 {
-  double rnd;
   int sign;
 
   if(!(x >= 0))
@@ -701,7 +700,6 @@ local void min_of_cubic(bool *psuccess,double *pb,double *pxmin,
   double d_coef[3];
   double dd_coef[2];
   double discriminant;
-  double remainder;
   double x1,x2,y1,y2,ddy1,ddy2,w;
   double sqrt_discriminant;
 
@@ -968,28 +966,6 @@ local void set_jumplen(cntxt c)
 #if DEBUG
   printf("x0s=%lg\n",c->x0s);
 #endif
-}
-
-
-/*
-  check that distance from parabola min shrinks by factor "shrink"
-
-  Check 1st and 2nd order conditions.
-*/
-local bool wolfe_condition_satisfied(double x0,double f0,double df0,
-             double xs,double fs,double dfs,
-             double shrink)
-{
-  if(!(fs <= f0-wn_abs(0.25*(1.0-wn_square(shrink))*(xs-x0)*df0)))
-  {
-    return(FALSE);
-  }
-  if(!(wn_abs(dfs) < shrink*wn_abs(df0)))
-  {
-    return(FALSE);
-  }
-
-  return(TRUE);
 }
 
 

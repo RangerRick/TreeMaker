@@ -570,7 +570,7 @@ local void lo_trace_group_one_line(FILE *out, wn_memgp group)
     /**/      "%waste", "%free", "%leftover", "heapsize");
     fprintf(out, "    %14s  %6s  %5s %9s %16s ------------------\n",
     /**/  "--------------", "------", "-----", "---------",
-    /**/    "----------------", "----------------");
+    /**/    "----------------");
   }
 
   if (!(lo_traces_displayed % 3))
@@ -973,7 +973,7 @@ void wn_print_mem_used(void)
 {
   char string[150];
 
-  (void)sprintf(string,"total memory used = %d\n",wn_mem_used());
+  (void)sprintf(string,"total memory used = %ld\n",wn_mem_used());
   fputs(string,stdout);
   fflush(stdout);
 }
@@ -983,7 +983,7 @@ void wn_print_group_mem_used(wn_memgp group)
 {
   char string[150];
 
-  (void)sprintf(string,"total memory used for group = %d\n",
+  (void)sprintf(string,"total memory used for group = %ld\n",
   /**/            wn_group_mem_used(group));
   fputs(string,stdout);
   fflush(stdout);
@@ -1103,13 +1103,6 @@ bool wn_mem_in_group(ptr p,wn_memgp group)
   }
 
   return(FALSE);
-}
-
-
-local void
-group_memory_fragmentation_report(wn_memgp group, int level)
-{
-  /* stub */
 }
 
 

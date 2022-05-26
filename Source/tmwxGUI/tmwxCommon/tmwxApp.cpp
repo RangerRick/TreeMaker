@@ -256,14 +256,15 @@ bool tmwxApp::OnInit(void)
 #define INSTALL_PREFIX "/usr/local"
 #endif
   wxString prefix;
-  if (! mConfig.mInstallDir.IsEmpty ())
+  if (! mConfig.mInstallDir.IsEmpty ()) {
     prefix = mConfig.mInstallDir;
-  else {
+  } else {
     char *p = getenv ("TREEMAKER_PREFIX");
-    if (p)
-      prefix = wxT (p);
-    else
+    if (p) {
+      prefix = wxString(p, wxConvLocal);
+    } else {
       prefix = wxT (INSTALL_PREFIX);
+    }
   }
   dynamic_cast<wxStandardPaths &> (wxStandardPaths::Get()).
     SetInstallPrefix(prefix);
@@ -275,8 +276,8 @@ bool tmwxApp::OnInit(void)
 
 #ifdef __LINUX__
   /* Load icons. Silently ignore failures (SetIcon will also silently fail) */
-  mConfig.mDocIcon.LoadFile (wxT (mDataDir + "/Icon_doc_48.png"));
-  mConfig.mAppIcon.LoadFile (wxT (mDataDir + "/Icon_app_48.png"));
+  mConfig.mDocIcon.LoadFile (mDataDir + wxT("/Icon_doc_48.png"));
+  mConfig.mAppIcon.LoadFile (mDataDir + wxT("/Icon_app_48.png"));
 #endif // __LINUX__
   
 #ifdef TM_USE_LOGFRAME

@@ -78,55 +78,9 @@ local bool is_valid_number(double x)
 }
 
 
-local void init_minmax(double *pmin,double *pmax)
-{
-  *pmin = INFINITY;
-  *pmax = -INFINITY;
-}
-
-
-local void add_x_to_minmax(double *pmin,double *pmax,double x)
-{
-  if(x < *pmin)
-  {
-    *pmin = x;
-  }
-  if(x > *pmax)
-  {
-    *pmax = x;
-  }
-}
-
-
 local void clear_data(void)
 {
   num_low_data = num_high_data = 0;
-}
-
-
-local void print_data(void)
-{
-  int i;
-
-  printf("max_offshifted_fs = (%lg - %lg)\n",
-   low_x_max_offshifted_f,high_x_max_offshifted_f);
-  printf("low_xy = (%lg - %lg)\n",low_x,high_x);
-
-  printf("[ ");
-
-  for(i=-num_low_data+1;i<=num_high_data-1;++i)
-  {
-    if(i==0)
-    {
-      printf(" <(%20.20lg %20.20lg)>",xs[i],fs[i]);
-    }
-    else
-    {
-      printf(" (%20.20lg %20.20lg)",xs[i],fs[i]);
-    }
-  }
-
-  printf("]\n");
 }
 
 
@@ -204,47 +158,6 @@ local void shift_data(int start,int fin,int offset)
   }
       }
     }
-  }
-}
-
-
-local void recenter_data(void)
-{
-  double f,f_min;
-  int i,best_i;
-
-  f_min = INFINITY;
-  best_i = 0;
-
-  for(i=-num_low_data+1;i<=num_high_data-1;++i)
-  {
-    f = fs[i];
-
-    if(f < f_min)
-    {
-      f_min = f;
-      best_i = i;
-    }
-  }
-
-  if(best_i != 0)
-  {
-    shift_data(-num_low_data+1,num_high_data-1,-best_i);
-
-    num_low_data += best_i;
-    num_high_data -= best_i;
-
-    if(num_low_data > BUF_RADIUS-1)
-    {
-      num_low_data = BUF_RADIUS-1;
-    }
-    if(num_high_data > BUF_RADIUS-1)
-    {
-      num_high_data = BUF_RADIUS-1;
-    }
-
-    wn_assert(num_low_data > 0);
-    wn_assert(num_high_data > 0);
   }
 }
 
@@ -410,7 +323,6 @@ local void gen_quadratic_probe(bool *psuccess,double *pxnew)
 {
   int i;
   double a,x0[3],b,worst_f[3];
-  double test_x0;
   int code;
   bool success[3];
   double best_worst_f;
