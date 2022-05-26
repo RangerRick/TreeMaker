@@ -1,0 +1,9 @@
+# vim and OS droppings
+.*.sw[po]
+.DS_Store
+
+# generated objects and dependencies
+*.o
+*.dep
+
+/linux/build/
