@@ -9,6 +9,7 @@ Copyright:    ©2005 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmwxHtmlHelpFrame.h"
+#include "tmwxHtmlHelpWindow.h"
 #include "tmwxApp.h"
 
 /*****
@@ -38,8 +39,8 @@ from within the tmwxHtmlHelpController class.
 *****/
 void tmwxHtmlHelpFrame::SetHtmlHelpPrinter(wxHtmlEasyPrinting* printer)
 {
-  if (m_Printer) delete m_Printer;
-  m_Printer = printer;
+  tmwxHtmlHelpWindow* const parent = (tmwxHtmlHelpWindow*)this->GetParent();
+  parent->SetPrinter(printer);
 }
 
 
@@ -57,9 +58,11 @@ Perform the File->Print... command
 *****/
 void tmwxHtmlHelpFrame::OnPrint(wxCommandEvent& event)
 {
-  TMASSERT(m_Printer);
-  TMASSERT(!!m_HtmlWin->GetOpenedPage());
-  m_Printer->PrintFile(m_HtmlWin->GetOpenedPage());
+  tmwxHtmlHelpWindow* const parent = (tmwxHtmlHelpWindow*)this->GetParent();
+  wxHtmlWindow* htmlWin = parent->GetHtmlWindow();
+  TMASSERT(!!htmlWin->GetOpenedPage());
+  wxHtmlEasyPrinting* printer = parent->GetPrinter();
+  printer->PrintFile(htmlWin->GetOpenedPage());
 }
 
 
@@ -77,9 +80,11 @@ Perform the File->Print Preview... command
 *****/
 void tmwxHtmlHelpFrame::OnPrintPreview(wxCommandEvent& event)
 {
-  TMASSERT(m_Printer);
-  TMASSERT(!!m_HtmlWin->GetOpenedPage());
-  m_Printer->PreviewFile(m_HtmlWin->GetOpenedPage());
+  tmwxHtmlHelpWindow* const parent = (tmwxHtmlHelpWindow*)this->GetParent();
+  wxHtmlWindow* htmlWin = parent->GetHtmlWindow();
+  TMASSERT(!!htmlWin->GetOpenedPage());
+  wxHtmlEasyPrinting* printer = parent->GetPrinter();
+  printer->PreviewFile(htmlWin->GetOpenedPage());
 }
 
 

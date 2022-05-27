@@ -204,6 +204,7 @@ GUISRC = \
 	$(H2S)/tmwxGUI/tmwxDocView/tmwxView.cpp \
 	$(H2S)/tmwxGUI/tmwxFoldedForm/tmwxFoldedFormFrame.cpp \
 	$(H2S)/tmwxGUI/tmwxHtmlHelp/tmwxHtmlHelpController.cpp \
+	$(H2S)/tmwxGUI/tmwxHtmlHelp/tmwxHtmlHelpWindow.cpp \
 	$(H2S)/tmwxGUI/tmwxHtmlHelp/tmwxHtmlHelpFrame.cpp \
 	$(H2S)/tmwxGUI/tmwxInspector/tmwxConditionEdgeLengthFixedPanel.cpp \
 	$(H2S)/tmwxGUI/tmwxInspector/tmwxConditionEdgesSameStrainPanel.cpp \

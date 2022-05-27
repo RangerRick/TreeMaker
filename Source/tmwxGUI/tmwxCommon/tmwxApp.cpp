@@ -22,6 +22,7 @@ Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
 #endif // TM_USE_LOGFRAME
 #include "tmwxPrintout.h"
 #include "tmwxHtmlHelpController.h"
+#include "tmwxHtmlHelpWindow.h"
 #include "tmwxHtmlHelpFrame.h"
 
 #include "tmVersion.h"

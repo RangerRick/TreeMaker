@@ -46,7 +46,7 @@ wxHtmlHelpFrame* tmwxHtmlHelpController::CreateHelpFrame(wxHtmlHelpData* data)
 Create the help window. Overridden so that on Mac we can replace the menu bar
 of the frame.
 *****/
-void tmwxHtmlHelpController::CreateHelpWindow()
+wxWindow* tmwxHtmlHelpController::CreateHelpWindow()
 {
 #ifdef __WXMAC__
   // Here we simply reproduce the ancestor method, except for the extra call
@@ -68,7 +68,8 @@ void tmwxHtmlHelpController::CreateHelpWindow()
   gApp->MakeMenuBar(m_helpFrame);  // replaced menu bar with our own
   m_helpFrame->SetTitleFormat(m_titleFormat);
   m_helpFrame->Show(true);
+  return m_helpFrame;
 #else
-  wxHtmlHelpController::CreateHelpWindow();
+  return wxHtmlHelpController::CreateHelpWindow();
 #endif // __WXMAC__
 }
