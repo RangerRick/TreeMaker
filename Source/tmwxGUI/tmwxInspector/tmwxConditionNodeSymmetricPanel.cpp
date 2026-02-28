@@ -99,8 +99,7 @@ void tmwxConditionNodeSymmetricPanel::OnApply(wxCommandEvent&)
         mConditionNodeSymmetric->SetNode(newNode);
       }
     }
-    gDocManager->GetCurrentDocumentLocal()->
-      SubmitCommand(wxT("Edit Node Condition"));
+    gDocManager->SubmitCommand(wxT("Edit Node Condition"));
     Fill();
   } 
 }

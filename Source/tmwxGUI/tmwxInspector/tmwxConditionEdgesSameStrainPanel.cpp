@@ -115,8 +115,7 @@ void tmwxConditionEdgesSameStrainPanel::OnApply(wxCommandEvent&)
         mConditionEdgesSameStrain->SetEdge2(newEdge2);
       }
     }
-    gDocManager->GetCurrentDocumentLocal()->
-      SubmitCommand(wxT("Edit Edge Condition"));
+    gDocManager->SubmitCommand(wxT("Edit Edge Condition"));
     Fill();
   } 
 }

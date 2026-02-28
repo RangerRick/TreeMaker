@@ -5,7 +5,7 @@ Purpose:      Source file for TreeMaker document manager class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2005-11-30
-Copyright:    ©2005 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2005 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmwxDocManager.h"
@@ -95,6 +95,18 @@ void tmwxDocManager::CheckLastDoc()
 #ifdef __MWERKS__
   #pragma mark -
 #endif
+
+
+/*****
+Submit a command to the current document if one exists. No-op if no document
+is open, which can happen during shutdown or after closing the last document.
+*****/
+void tmwxDocManager::SubmitCommand(const wxString& name)
+{
+  tmwxDoc* doc = GetCurrentDocumentLocal();
+  if (doc)
+    doc->SubmitCommand(name);
+}
 
 
 /*****

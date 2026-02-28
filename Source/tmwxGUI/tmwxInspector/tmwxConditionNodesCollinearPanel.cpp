@@ -126,8 +126,7 @@ void tmwxConditionNodesCollinearPanel::OnApply(wxCommandEvent&)
         mConditionNodesCollinear->SetNode3(newNode3);
       }
     }
-    gDocManager->GetCurrentDocumentLocal()->
-      SubmitCommand(wxT("Edit Node Condition"));
+    gDocManager->SubmitCommand(wxT("Edit Node Condition"));
     Fill();
   } 
 }

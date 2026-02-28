@@ -98,8 +98,7 @@ void tmwxConditionNodeOnEdgePanel::OnApply(wxCommandEvent&)
         mConditionNodeOnEdge->SetNode(newNode);
       }
     }
-    gDocManager->GetCurrentDocumentLocal()->
-      SubmitCommand(wxT("Edit Node Condition"));
+    gDocManager->SubmitCommand(wxT("Edit Node Condition"));
     Fill();
   } 
 }

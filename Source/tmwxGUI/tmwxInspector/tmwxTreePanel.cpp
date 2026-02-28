@@ -201,8 +201,7 @@ void tmwxTreePanel::OnButton(wxCommandEvent& event)
     mTree->SetSymAngle(90.0);
   }
   
-  gDocManager->GetCurrentDocumentLocal()->
-    SubmitCommand(wxT("Edit Tree"));
+  gDocManager->SubmitCommand(wxT("Edit Tree"));
 }
 
 
@@ -219,8 +218,7 @@ void tmwxTreePanel::OnCheckBox(wxCommandEvent& event)
   else
     TMFAIL("unknown checkbox");
   
-  gDocManager->GetCurrentDocumentLocal()->
-    SubmitCommand(wxT("Edit Tree"));
+  gDocManager->SubmitCommand(wxT("Edit Tree"));
 }
 
 
@@ -307,8 +305,7 @@ void tmwxTreePanel::OnApply(wxCommandEvent&)
         mTree->SetSymAngle(newSymAngle);
       }
     }
-    gDocManager->GetCurrentDocumentLocal()->
-      SubmitCommand(wxT("Edit Tree"));
+    gDocManager->SubmitCommand(wxT("Edit Tree"));
     Fill();
   } 
 }

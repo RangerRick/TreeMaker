@@ -150,8 +150,7 @@ void tmwxEdgePanel::OnApply(wxCommandEvent&)
         mEdge->SetLabel(newLabel.mb_str());
       }
     }
-    gDocManager->GetCurrentDocumentLocal()->
-      SubmitCommand(wxT("Edit Edge"));
+    gDocManager->SubmitCommand(wxT("Edit Edge"));
     Fill();
   }  
 }

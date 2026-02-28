@@ -158,8 +158,7 @@ void tmwxConditionNodeFixedPanel::OnApply(wxCommandEvent&)
           mConditionNodeFixed->SetYFixValue(newYFixValue);
       }
     } 
-    gDocManager->GetCurrentDocumentLocal()->
-      SubmitCommand(wxT("Edit Node Condition"));
+    gDocManager->SubmitCommand(wxT("Edit Node Condition"));
     Fill();
   } 
 }

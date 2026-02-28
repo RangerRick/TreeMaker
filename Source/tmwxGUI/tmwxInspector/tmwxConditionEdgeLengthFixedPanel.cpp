@@ -100,8 +100,7 @@ void tmwxConditionEdgeLengthFixedPanel::OnApply(wxCommandEvent&)
         mConditionEdgeLengthFixed->SetEdge(newEdge);
       }
     }
-    gDocManager->GetCurrentDocumentLocal()->
-      SubmitCommand(wxT("Edit Edge Condition"));
+    gDocManager->SubmitCommand(wxT("Edit Edge Condition"));
     Fill();
   } 
 }

@@ -134,8 +134,7 @@ void tmwxConditionPathAngleFixedPanel::OnApply(wxCommandEvent&)
         mConditionPathAngleFixed->SetAngle(newAngle);
       }
     }
-    gDocManager->GetCurrentDocumentLocal()->
-      SubmitCommand(wxT("Edit Path Condition"));
+    gDocManager->SubmitCommand(wxT("Edit Path Condition"));
     Fill();
   } 
 }

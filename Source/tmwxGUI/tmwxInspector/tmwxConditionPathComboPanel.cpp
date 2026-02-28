@@ -248,8 +248,7 @@ void tmwxConditionPathComboPanel::OnApply(wxCommandEvent&)
         mConditionPathCombo->SetQuantOffset(newQuantOffset);
       }
     }
-    gDocManager->GetCurrentDocumentLocal()->
-      SubmitCommand(wxT("Edit Path Condition"));
+    gDocManager->SubmitCommand(wxT("Edit Path Condition"));
     Fill();
   } 
 }

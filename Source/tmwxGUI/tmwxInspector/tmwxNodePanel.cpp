@@ -166,8 +166,7 @@ void tmwxNodePanel::OnApply(wxCommandEvent&)
         mNode->SetLabel(newLabel.mb_str());
       }
     }
-    gDocManager->GetCurrentDocumentLocal()->
-      SubmitCommand(wxT("Edit Node"));
+    gDocManager->SubmitCommand(wxT("Edit Node"));
     Fill();
   }
 }

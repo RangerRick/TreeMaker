@@ -5,7 +5,7 @@ Purpose:      Header file for TreeMaker document manager class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2005-11-30
-Copyright:    ©2005 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2005 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #ifndef _TMWXDOCMANAGER_H_
@@ -30,6 +30,7 @@ public:
   void SetCurrentDocumentLocal(tmwxDoc* doc);
   tmwxDoc* GetCurrentDocumentLocal();
   tmwxView* GetCurrentViewLocal();
+  void SubmitCommand(const wxString& name);
     
   // Handle closure of last document
   void CheckLastDoc();
