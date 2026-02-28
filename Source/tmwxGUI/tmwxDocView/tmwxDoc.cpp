@@ -5,7 +5,7 @@ Purpose:      Source file for TreeMaker document class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-15
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmwxDoc.h"
@@ -155,7 +155,7 @@ bool tmwxDoc::ReadTreeFromFile(const wxString& file)
   try {
     LoadObject(fin);
   }
-  catch (tmTree::EX_IO_BAD_TREE_TAG exc) {
+  catch (const tmTree::EX_IO_BAD_TREE_TAG& exc) {
     wxString strToken = wxString::FromAscii(exc.mToken.c_str());
     wxString msg = wxString::Format(
       wxT("Sorry, this file doesn't look like a TreeMaker file: "\
@@ -163,7 +163,7 @@ bool tmwxDoc::ReadTreeFromFile(const wxString& file)
     tmwxAlertError(msg, msgTitle, GetDocumentWindow());
     return false;
   }
-  catch (tmTree::EX_IO_BAD_TREE_VERSION exc) {
+  catch (const tmTree::EX_IO_BAD_TREE_VERSION& exc) {
     wxString strToken = wxString::FromAscii(exc.mToken.c_str());
     wxString msg = wxString::Format(
       wxT("Sorry, this file has an unrecognized (possibly newer) version "\
@@ -171,7 +171,7 @@ bool tmwxDoc::ReadTreeFromFile(const wxString& file)
     tmwxAlertError(msg, msgTitle, GetDocumentWindow());
     return false;
   }
-  catch (tmTree::EX_IO_BAD_REF_INDEX exc) {
+  catch (const tmTree::EX_IO_BAD_REF_INDEX& exc) {
     wxString strToken = wxString::FromAscii(exc.mToken.c_str());
     wxString msg = wxString::Format(
       wxT("Sorry, this file appears to be corrupted (bad reference index "\
@@ -179,7 +179,7 @@ bool tmwxDoc::ReadTreeFromFile(const wxString& file)
     tmwxAlertError(msg, msgTitle, GetDocumentWindow());
     return false;
   }
-  catch (tmTree::EX_IO_BAD_TAG exc ) {
+  catch (const tmTree::EX_IO_BAD_TAG& exc) {
     wxString strToken = wxString::FromAscii(exc.mToken.c_str());
     wxString msg = wxString::Format(
       wxT("Sorry, this file appears to be corrupted (bad object tag size: "\
@@ -187,7 +187,7 @@ bool tmwxDoc::ReadTreeFromFile(const wxString& file)
     tmwxAlertError(msg, msgTitle, GetDocumentWindow());
     return false;
   }
-  catch (tmTree::EX_IO_UNRECOGNIZED_TAG exc) {
+  catch (const tmTree::EX_IO_UNRECOGNIZED_TAG& exc) {
     wxString strToken = wxString::FromAscii(exc.mToken.c_str());
     wxString msg = wxString::Format(
       wxT("Sorry, this file appears to be corrupted (unrecognized object tag: "\
@@ -195,15 +195,15 @@ bool tmwxDoc::ReadTreeFromFile(const wxString& file)
     tmwxAlertError(msg, msgTitle, GetDocumentWindow());
     return false;
   }
-  catch (tmTree::EX_IO_TOO_LONG_STRING exc) {
+  catch (const tmTree::EX_IO_TOO_LONG_STRING& exc) {
     wxString strToken = wxString::FromAscii(exc.mToken.c_str());
     wxString msg = wxString::Format(
-      wxT("Sorry, text label %s in this file was too long"), 
+      wxT("Sorry, text label %s in this file was too long"),
       strToken.c_str());
     tmwxAlertError(msg, msgTitle, GetDocumentWindow());
     return false;
   }
-  catch (tmTree::EX_IO_BAD_ESCAPE exc) {
+  catch (const tmTree::EX_IO_BAD_ESCAPE& exc) {
     wxString strToken = wxString::FromAscii(exc.mToken.c_str());
     wxString msg = wxString::Format(
       wxT("Sorry, a text label contained a bad escape sequence: "\
@@ -211,10 +211,10 @@ bool tmwxDoc::ReadTreeFromFile(const wxString& file)
     tmwxAlertError(msg, msgTitle, GetDocumentWindow());
     return false;
   }
-  catch (tmTree::EX_IO_BAD_TOKEN exc) {
+  catch (const tmTree::EX_IO_BAD_TOKEN& exc) {
     wxString strToken = wxString::FromAscii(exc.mToken.c_str());
     wxString msg = wxString::Format(
-      wxT("Sorry, a bad token (%s) was found. File corrupted."), 
+      wxT("Sorry, a bad token (%s) was found. File corrupted."),
       strToken.c_str());
     tmwxAlertError(msg, msgTitle, GetDocumentWindow());
     return false;
@@ -306,7 +306,7 @@ tmwxDoc::tmwxInputStream& tmwxDoc::LoadObject(tmwxInputStream& stream)
   try {
     theTree->GetSelf(stream);
   }
-  catch (tmTree::EX_IO_UNRECOGNIZED_CONDITION exc) {
+  catch (const tmTree::EX_IO_UNRECOGNIZED_CONDITION& exc) {
     // This is a mild error: we encountered some unrecognized conditions. This
     // is not fatal -- we've already ignored the offenders -- but we'll let the
     // user know what happened.

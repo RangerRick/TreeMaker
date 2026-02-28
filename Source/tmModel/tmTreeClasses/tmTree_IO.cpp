@@ -106,10 +106,10 @@ void tmTree::GetSelf(istream& is)
   try {
     CheckTagStr<tmTree>(is);
   }
-  catch (EX_IO_BAD_TAG exc) {
+  catch (const EX_IO_BAD_TAG& exc) {
     throw EX_IO_BAD_TREE_TAG(exc.mToken);
   }
-  catch (EX_IO_UNRECOGNIZED_TAG exc) {
+  catch (const EX_IO_UNRECOGNIZED_TAG& exc) {
     throw EX_IO_BAD_TREE_TAG(exc.mToken);
   }
   
