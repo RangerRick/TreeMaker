@@ -5,18 +5,18 @@ Purpose:      Implementation file for class tmwxHtmlHelpFrame
 Author:       Robert J. Lang
 Modified by:  
 Created:      2005-11-23
-Copyright:    ©2005 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2005 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmwxHtmlHelpFrame.h"
-#include "tmwxHtmlHelpWindow.h"
 #include "tmwxApp.h"
 
 /*****
 Constructor
 *****/
-tmwxHtmlHelpFrame::tmwxHtmlHelpFrame(wxHtmlHelpData* data) : 
-  wxHtmlHelpFrame(data)
+tmwxHtmlHelpFrame::tmwxHtmlHelpFrame(wxHtmlHelpData* data) :
+  wxHtmlHelpFrame(data),
+  m_printer(nullptr)
 {
 }
 
@@ -39,8 +39,7 @@ from within the tmwxHtmlHelpController class.
 *****/
 void tmwxHtmlHelpFrame::SetHtmlHelpPrinter(wxHtmlEasyPrinting* printer)
 {
-  tmwxHtmlHelpWindow* const parent = (tmwxHtmlHelpWindow*)this->GetParent();
-  parent->SetPrinter(printer);
+  m_printer = printer;
 }
 
 
@@ -56,13 +55,12 @@ void tmwxHtmlHelpFrame::OnPrintUpdateUI(wxUpdateUIEvent& event)
 /*****
 Perform the File->Print... command
 *****/
-void tmwxHtmlHelpFrame::OnPrint(wxCommandEvent& event)
+void tmwxHtmlHelpFrame::OnPrint(wxCommandEvent&)
 {
-  tmwxHtmlHelpWindow* const parent = (tmwxHtmlHelpWindow*)this->GetParent();
-  wxHtmlWindow* htmlWin = parent->GetHtmlWindow();
+  wxHtmlWindow* htmlWin = GetHelpWindow()->GetHtmlWindow();
   TMASSERT(!!htmlWin->GetOpenedPage());
-  wxHtmlEasyPrinting* printer = parent->GetPrinter();
-  printer->PrintFile(htmlWin->GetOpenedPage());
+  TMASSERT(m_printer);
+  m_printer->PrintFile(htmlWin->GetOpenedPage());
 }
 
 
@@ -78,13 +76,12 @@ void tmwxHtmlHelpFrame::OnPrintPreviewUpdateUI(wxUpdateUIEvent& event)
 /*****
 Perform the File->Print Preview... command
 *****/
-void tmwxHtmlHelpFrame::OnPrintPreview(wxCommandEvent& event)
+void tmwxHtmlHelpFrame::OnPrintPreview(wxCommandEvent&)
 {
-  tmwxHtmlHelpWindow* const parent = (tmwxHtmlHelpWindow*)this->GetParent();
-  wxHtmlWindow* htmlWin = parent->GetHtmlWindow();
+  wxHtmlWindow* htmlWin = GetHelpWindow()->GetHtmlWindow();
   TMASSERT(!!htmlWin->GetOpenedPage());
-  wxHtmlEasyPrinting* printer = parent->GetPrinter();
-  printer->PreviewFile(htmlWin->GetOpenedPage());
+  TMASSERT(m_printer);
+  m_printer->PreviewFile(htmlWin->GetOpenedPage());
 }
 
 
