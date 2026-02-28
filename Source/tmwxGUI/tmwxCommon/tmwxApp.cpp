@@ -261,7 +261,7 @@ bool tmwxApp::OnInit(void)
     prefix = mConfig.mInstallDir;
   } else {
     char *p = getenv ("TREEMAKER_PREFIX");
-    if (p) {
+    if (p && wxDirExists(wxString(p, wxConvLocal))) {
       prefix = wxString(p, wxConvLocal);
     } else {
       prefix = wxT (INSTALL_PREFIX);
