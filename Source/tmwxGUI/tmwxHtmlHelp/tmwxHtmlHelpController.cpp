@@ -48,30 +48,10 @@ of the frame.
 *****/
 wxWindow* tmwxHtmlHelpController::CreateHelpWindow()
 {
+  wxWindow* result = wxHtmlHelpController::CreateHelpWindow();
 #ifdef __WXMAC__
-  // Here we simply reproduce the ancestor method, except for the extra call
-  // to replace the menu bar partway through.
-  if (m_helpWindow) {
-    if (m_helpFrame)
-      m_helpFrame->Raise();
-    return m_helpWindow;
-  }
-  if (m_Config == NULL) {
-    m_Config = wxConfigBase::Get(false);
-    if (m_Config != NULL)
-      m_ConfigRoot = _T("wxWindows/wxHtmlHelpController");
-  }
-  m_helpFrame = CreateHelpFrame(&m_helpData);
-  m_helpFrame->SetController(this);
-  if (m_Config)
-    m_helpFrame->UseConfig(m_Config, m_ConfigRoot);
-  m_helpFrame->Create(NULL, wxID_HTML_HELPFRAME, wxEmptyString, m_FrameStyle);
-  m_helpWindow = m_helpFrame->GetHelpWindow();
-  gApp->MakeMenuBar(m_helpFrame);
-  m_helpFrame->SetTitleFormat(m_titleFormat);
-  m_helpFrame->Show(true);
-  return m_helpWindow;
-#else
-  return wxHtmlHelpController::CreateHelpWindow();
-#endif // __WXMAC__
+  if (m_helpFrame)
+    gApp->MakeMenuBar(m_helpFrame);
+#endif
+  return result;
 }
