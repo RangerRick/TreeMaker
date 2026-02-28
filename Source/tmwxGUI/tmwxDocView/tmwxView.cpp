@@ -107,7 +107,7 @@ Clean up windows used for displaying the view.
 bool tmwxView::OnClose(bool deleteWindow)
 {
   if (!GetDocument()->Close())
-    return FALSE;
+    return false;
   
   wxString s(wxTheApp->GetAppName());
   if (mDesignFrame)
@@ -115,7 +115,7 @@ bool tmwxView::OnClose(bool deleteWindow)
   
   SetFrame((wxFrame *) NULL);
   
-  Activate(FALSE);
+  Activate(false);
   
   if (deleteWindow)
   {

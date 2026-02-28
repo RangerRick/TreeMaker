@@ -486,14 +486,14 @@ void tmwxApp::ShowOptionalAbout()
 Initialize command-line switches that we accept
 *****/
 void tmwxApp::OnInitCmdLine(wxCmdLineParser &argParser) {
-  argParser.AddSwitch (_T("v"), _T("version"), 
-           _T("show program version"));
-  argParser.AddSwitch (_T("h"), _T("help"), 
-           _T("show option list"), wxCMD_LINE_OPTION_HELP);
-  argParser.AddOption(_T("d"), _T("datadir"),
-          _T("TreeMaker data directory path prefix"), 
+  argParser.AddSwitch (wxT("v"), wxT("version"), 
+           wxT("show program version"));
+  argParser.AddSwitch (wxT("h"), wxT("help"), 
+           wxT("show option list"), wxCMD_LINE_OPTION_HELP);
+  argParser.AddOption(wxT("d"), wxT("datadir"),
+          wxT("TreeMaker data directory path prefix"), 
           wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL);
-  argParser.AddParam (_T("document"), wxCMD_LINE_VAL_STRING, 
+  argParser.AddParam (wxT("document"), wxCMD_LINE_VAL_STRING, 
           wxCMD_LINE_PARAM_OPTIONAL | wxCMD_LINE_PARAM_MULTIPLE);
 }
 
@@ -504,11 +504,11 @@ Respond to command-line arguments after the command line has been parsed.
 bool tmwxApp::OnCmdLineParsed(wxCmdLineParser& parser) {
   // check options
   wxString par;
-  if (parser.Found (_T("v"))) {
+  if (parser.Found (wxT("v"))) {
     std::cout << TM_APP_BUILD_NAME_STR << "\n";
     exit (0);
   }
-  if (parser.Found (_T("d"), &par))
+  if (parser.Found (wxT("d"), &par))
     mConfig.mInstallDir = par;
   // parser is local to base method, so must copy non-option parameters here
   size_t nFiles = parser.GetParamCount();
