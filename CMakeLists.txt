@@ -197,6 +197,27 @@ if(TM_BUILD_GUI)
       MACOSX_BUNDLE_BUNDLE_NAME "TreeMaker"
       MACOSX_BUNDLE_BUNDLE_VERSION "${PROJECT_VERSION}"
       MACOSX_BUNDLE_SHORT_VERSION_STRING "${PROJECT_VERSION}"
+      MACOSX_BUNDLE_GUI_IDENTIFIER "com.langorigami.treemaker"
+    )
+    # Build help.zip from Source/help and install into SharedSupport
+    set(HELP_SRC_DIR "${CMAKE_SOURCE_DIR}/Source/help")
+    set(HELP_ZIP "${CMAKE_BINARY_DIR}/help.zip")
+    add_custom_command(
+      OUTPUT ${HELP_ZIP}
+      COMMAND ${CMAKE_COMMAND} -E rm -f ${HELP_ZIP}
+      COMMAND zip -r ${HELP_ZIP} . -x ".*"
+      WORKING_DIRECTORY ${HELP_SRC_DIR}
+      COMMENT "Building help.zip"
+    )
+    add_custom_target(help_zip ALL DEPENDS ${HELP_ZIP})
+    add_dependencies(TreeMaker help_zip)
+    set(SHARED_SUPPORT "$<TARGET_BUNDLE_DIR:TreeMaker>/Contents/SharedSupport")
+    add_custom_command(TARGET TreeMaker POST_BUILD
+      COMMAND ${CMAKE_COMMAND} -E make_directory ${SHARED_SUPPORT}
+      COMMAND ${CMAKE_COMMAND} -E copy ${HELP_ZIP} ${SHARED_SUPPORT}/
+      COMMAND ${CMAKE_COMMAND} -E copy
+        "${CMAKE_SOURCE_DIR}/Source/images/SplashScreen.png" ${SHARED_SUPPORT}/
+      COMMENT "Bundling resources into SharedSupport"
     )
   endif()
 endif()
