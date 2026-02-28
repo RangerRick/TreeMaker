@@ -5,7 +5,7 @@ Purpose:      Source file for class tmwxOptimizerDialog, common routines
 Author:       Robert J. Lang
 Modified by:  
 Created:      2004-04-22
-Copyright:    ©2004 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2004 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmwxOptimizerDialog.h"
@@ -40,8 +40,8 @@ tmwxOptimizerDialog::tmwxOptimizerDialog(tmwxDoc* aDoc, tmOptimizer* aOptimizer,
   mOptimizer(aOptimizer),
   mStatus(IN_LOOP),
   mReason(0)
-#ifdef __WXMSW__
-  ,mWindowDisabler(NULL)
+#if defined(__WXMSW__) || defined(__WXMAC__)
+  ,mWindowDisabler(nullptr)
 #endif
 {
   wxBoxSizer* colsizer = new wxBoxSizer(wxVERTICAL);  

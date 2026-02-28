@@ -5,7 +5,7 @@ Purpose:      Header file for class tmwxOptimizerDialog
 Author:       Robert J. Lang
 Modified by:  
 Created:      2004-04-22
-Copyright:    ©2004 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2004 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #ifndef _TMWXOPTIMIZERDIALOG_H_
@@ -67,8 +67,8 @@ private:
   int mStatus;                // also provides return value from ShowModal()
   int mReason;                // additional reason for OTHER_TERMINATION
 
-  // Windows specific modal dialog disabler
-#ifdef __WXMSW__
+  // Platform-specific modal dialog disabler
+#if defined(__WXMSW__) || defined(__WXMAC__)
   wxWindowDisabler* mWindowDisabler;
 #endif
 

@@ -12,8 +12,6 @@ Copyright:    (c)2004 Robert J. Lang. All Rights Reserved.
 
 #include "tmwxOptimizerDialog.h"
 
-static wxWindowDisabler* sWindowDisabler = nullptr;
-
 /**********
 class tmwxOptimizerDialog
 Dialog for long, cancellable calculations.
@@ -25,7 +23,7 @@ void tmwxOptimizerDialog::DoStartModal()
   ::wxBeginBusyCursor();
   Show(true);
   SetFocus();
-  sWindowDisabler = new wxWindowDisabler(this);
+  mWindowDisabler = new wxWindowDisabler(this);
 }
 
 
@@ -37,8 +35,8 @@ void tmwxOptimizerDialog::DoEventLoopOnce()
 
 void tmwxOptimizerDialog::DoFinishModal()
 {
-  delete sWindowDisabler;
-  sWindowDisabler = nullptr;
+  delete mWindowDisabler;
+  mWindowDisabler = nullptr;
   Show(false);
   ::wxEndBusyCursor();
 }
