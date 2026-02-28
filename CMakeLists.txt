@@ -30,6 +30,12 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Profile")
   set(CMAKE_CXX_FLAGS_PROFILE "-O3 -g" CACHE STRING "" FORCE)
 endif()
 
+# Compiler hardening flags
+add_compile_options(-fstack-protector-strong -fPIE)
+if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+  add_compile_definitions(_FORTIFY_SOURCE=2)
+endif()
+
 # Source root
 set(TM_SOURCE_DIR "${CMAKE_SOURCE_DIR}/Source")
 
