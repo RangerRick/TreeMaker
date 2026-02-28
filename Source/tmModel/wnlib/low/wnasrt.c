@@ -122,8 +122,8 @@ void wn_get_assert_override_string(char *output_buffer,
 
   result += line_num * line_num * line_num * line_num * line_num * line_num;
 
-  sprintf(output_buffer, "WN_ASSERT_SUPPRESS_%s_%d_%x", file_name, line_num,
-  /**/                result);
+  snprintf(output_buffer, 1000, "WN_ASSERT_SUPPRESS_%s_%d_%x", file_name,
+  /**/                line_num, result);
   for (pc = output_buffer;  *pc;  ++pc)
   {
     if ('.' == *pc)
@@ -175,14 +175,15 @@ void wn_general_assert_routine(const char *file_name, int line_num,
   {
     /* There is no expression, we just reached a notreached */
 
-    (void)sprintf(string,
+    (void)snprintf(string, sizeof(string),
     /**/  "wn_assert%s_notreached() called -- %sforcing crash\n",
     /**/    warn_only ? "_warn" : "", warn_only ? "NOT " : "");
     (*psaved_assert_print)(string);
   }
   else
   {
-    (void)sprintf(string, "Assertion botched -- %sforcing crash\n",
+    (void)snprintf(string, sizeof(string),
+    /**/          "Assertion botched -- %sforcing crash\n",
     /**/          warn_only ? "NOT " : "");
     (*psaved_assert_print)(string);
 
@@ -190,7 +191,8 @@ void wn_general_assert_routine(const char *file_name, int line_num,
     ** very long */
     if (exp_string)
     {
-      (void) sprintf(string, "Expr (%s) was false\n", exp_string);
+      (void) snprintf(string, sizeof(string), "Expr (%s) was false\n",
+      /**/            exp_string);
       (*psaved_assert_print)(string);
     }
   }
@@ -198,11 +200,13 @@ void wn_general_assert_routine(const char *file_name, int line_num,
   pc = string;
   if (func_name)
   {
-    (void) sprintf(string, "%cn %s() ", exp_string ? 'i' : 'I', func_name);
+    (void) snprintf(string, sizeof(string), "%cn %s() ",
+    /**/            exp_string ? 'i' : 'I', func_name);
     for (  ;  *pc;  ++pc) ;
   }
-  (void) sprintf(pc, "%ct line %d in file %s\n", func_name ? 'a' : 'A',
-  /**/              line_num, file_name);
+  (void) snprintf(pc, sizeof(string) - (size_t)(pc - string),
+  /**/            "%ct line %d in file %s\n",
+  /**/            func_name ? 'a' : 'A', line_num, file_name);
   (*psaved_assert_print)(string);
 
   if (!warn_only)
