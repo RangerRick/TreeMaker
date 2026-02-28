@@ -5,7 +5,7 @@ Purpose:      Implementation file for class tmPolyOwner
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-12-04
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmPolyOwner.h"
@@ -164,7 +164,6 @@ void tmPolyOwner::BuildPolysFromPaths(tmArray<tmPath*>& aPathList,
   // expedient that as we build our list, we won't accept any polygon paths
   // that intersect ones that already exist.
   tmArray<tmPath*> polygonPaths;
-  size_t numIntersections = 0;
   for (size_t i = 0; i < aPathList.size(); ++i) {
     tmPath* aPath = aPathList[i];
     if (aPath->IsPolygonPath()) {
@@ -172,7 +171,6 @@ void tmPolyOwner::BuildPolysFromPaths(tmArray<tmPath*>& aPathList,
       for (size_t j = 0; j < polygonPaths.size(); ++j) {
         if (aPath->IntersectsInterior(polygonPaths[j])) {
           aPath->mIsPolygonPath = false;
-          ++numIntersections;
           break;
         }
       }
@@ -207,7 +205,6 @@ void tmPolyOwner::BuildPolysFromPaths(tmArray<tmPath*>& aPathList,
       thisNode = aPath->mNodes.back();
       aPoly->mRingNodes.push_back(firstNode);
       aPoly->mRingPaths.push_back(thisPath);
-      size_t tooMany = 0;
       do {
         GetNextPathAndNode(thisPath, thisNode, nextPath, nextNode);
         aPoly->mRingNodes.push_back(thisNode);
@@ -216,8 +213,6 @@ void tmPolyOwner::BuildPolysFromPaths(tmArray<tmPath*>& aPathList,
         else nextPath->mBkdPoly = aPoly;
         thisPath = nextPath;
         thisNode = nextNode;
-        tooMany++;
-        TMASSERT(tooMany < 100);  // Only for debugging, to avoid infinite loops
       } while (nextNode != firstNode);
       aPoly->CalcContents();
     }
@@ -229,7 +224,6 @@ void tmPolyOwner::BuildPolysFromPaths(tmArray<tmPath*>& aPathList,
       thisNode = aPath->mNodes.front();
       aPoly->mRingNodes.push_back(firstNode);
       aPoly->mRingPaths.push_back(thisPath);
-      size_t tooMany = 0;
       do {
         GetNextPathAndNode(thisPath, thisNode, nextPath, nextNode);
         aPoly->mRingNodes.push_back(thisNode);
@@ -238,9 +232,6 @@ void tmPolyOwner::BuildPolysFromPaths(tmArray<tmPath*>& aPathList,
         else nextPath->mBkdPoly = aPoly;
         thisPath = nextPath;
         thisNode = nextNode;
-        tooMany++;
-        TMASSERT(tooMany < 100);
-        
       } while (nextNode != firstNode);
       aPoly->CalcContents();
     }

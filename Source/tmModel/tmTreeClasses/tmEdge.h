@@ -5,7 +5,7 @@ Purpose:      Header file for tmEdge class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-15
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #ifndef _TMEDGE_H_
@@ -66,8 +66,8 @@ public:
     // Return the owner of this edge (always the tree).
     return mEdgeOwner;};
   
-  const tmFloat GetStrainedLength() const;
-  const tmFloat GetStrainedScaledLength() const;
+  tmFloat GetStrainedLength() const;
+  tmFloat GetStrainedScaledLength() const;
   
   // Setters
   void SetLabel(const char* aLabel);

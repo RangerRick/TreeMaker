@@ -5,7 +5,7 @@ Purpose:      Header file for tmFacet class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2004-04-24
-Copyright:    ©2004 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2004 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #ifndef _TMFACET_H_
@@ -30,7 +30,7 @@ Class that represents a facet in a crease pattern.
 **********/
 class tmFacet : public tmPart, public tmDpptrTarget {
 public:
-  const tmPoint GetCentroid() const {
+  tmPoint GetCentroid() const {
     // Return the centroid of this facet.
     return mCentroid;
   };
@@ -76,7 +76,7 @@ public:
     return mHeadFacets;
   };
   
-  const std::size_t GetOrder() const {
+  std::size_t GetOrder() const {
     // Return the facet order value. Comparing this number with the number from
     // any other facet will determine which facet is on top in the folded form.
     return mOrder;
@@ -89,7 +89,7 @@ public:
     COLOR_UP = 2
   };
   
-  const Color GetColor() const {
+  Color GetColor() const {
     // Return which side of this facet is facing up in the folded form.
     return mColor;
   };

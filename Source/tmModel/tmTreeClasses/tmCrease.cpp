@@ -5,7 +5,7 @@ Purpose:      Implementation file for tmCrease class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-27
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmCrease.h"
@@ -447,7 +447,7 @@ void tmCrease::Getv5Self(istream& is)
 /*****
 Put a tmCrease in version 4 format
 *****/
-void tmCrease::Putv4Self(ostream& os)
+void tmCrease::Putv4Self(ostream& /*os*/)
 {
   TMFAIL("tmCrease::Putv4Self");
 }

@@ -5,7 +5,7 @@ Purpose:      Implementation file for class tmPath
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-25
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmPath.h"
@@ -180,7 +180,7 @@ tmPath::~tmPath()
 Return the vector (in the paper) corresponding to this path. This is usually
 only meaningful for leaf paths.
 *****/
-const tmPoint tmPath::GetVector() const
+tmPoint tmPath::GetVector() const
 {
   return mNodes.back()->mLoc - mNodes.front()->mLoc;
 }
@@ -189,7 +189,7 @@ const tmPoint tmPath::GetVector() const
 /*****
 Return the angle of this path in degrees. The value lies within [-180, 180].
 *****/
-const tmFloat tmPath::GetAngle() const
+tmFloat tmPath::GetAngle() const
 {
   return RADIAN * Angle(mNodes.back()->mLoc - mNodes.front()->mLoc);
 }
@@ -198,7 +198,7 @@ const tmFloat tmPath::GetAngle() const
 /*****
 Return the angle of this path, with direction defined so it is within [0, 180).
 *****/
-const tmFloat tmPath::GetPositiveAngle() const
+tmFloat tmPath::GetPositiveAngle() const
 {
   tmFloat theAngle = GetAngle();
   if (theAngle >= 0) return theAngle;

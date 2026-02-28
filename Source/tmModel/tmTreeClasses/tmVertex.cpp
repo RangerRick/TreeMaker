@@ -5,7 +5,7 @@ Purpose:      Implementation file for tmVertex class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-12-04
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmVertex.h"
@@ -397,7 +397,7 @@ void tmVertex::Getv5Self(istream& is)
 /*****
 Put a tmVertex in version 4 format
 *****/
-void tmVertex::Putv4Self(ostream& os)
+void tmVertex::Putv4Self(ostream& /*os*/)
 {
   TMFAIL("tmVertex::Putv4Self");
 }

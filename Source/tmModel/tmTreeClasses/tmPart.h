@@ -5,7 +5,7 @@ Purpose:      Header file for class tmPart
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-15
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #ifndef _TMPART_H_
@@ -210,9 +210,9 @@ private:
   // Hide other constructors
   tmPart();
   tmPart(const tmPart& aPart);
-  
+
   // Friend classes
-  friend class Endl;
+  friend struct Endl;
   friend class tmTree;
   friend class tmNode;
   friend class tmNodeOwner;

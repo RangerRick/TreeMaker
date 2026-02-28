@@ -5,7 +5,7 @@ Purpose:      Header file for tmCrease class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-27
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #ifndef _TMCREASE_H_
@@ -52,7 +52,7 @@ public:
   
   // Structural kind getters
   
-  const Kind GetKind() const {
+  Kind GetKind() const {
     // Return the kind of crease, i.e., its AGRH assignment.
     return mKind;
   };
@@ -133,7 +133,7 @@ public:
     
   // Rebuilt at cleanup
   
-  const Fold GetFold() const {
+  Fold GetFold() const {
     // Return the mountain/valley/flat/unfolded status of this crese.
     return mFold;
   };
@@ -166,20 +166,20 @@ public:
     return mVertices.back();
   };
   
-  const tmPoint GetVector() const {
+  tmPoint GetVector() const {
     // Return the vector from the front vertex to the back vertex in paper
     // coordinates.
     return mVertices.back()->mLoc - mVertices.front()->mLoc;
   };
   
-  const tmFloat GetAngle() const {
-    // Return the angle of this crease in degrees. The value lies within 
+  tmFloat GetAngle() const {
+    // Return the angle of this crease in degrees. The value lies within
     // [-180, 180].
     return RADIAN * Angle(mVertices.back()->mLoc - mVertices.front()->mLoc);
   };
   
-  const tmFloat GetPositiveAngle() const {
-    // Return the angle of this crease, with direction defined so it is within 
+  tmFloat GetPositiveAngle() const {
+    // Return the angle of this crease, with direction defined so it is within
     // [0, 180).
     tmFloat theAngle = GetAngle();
     if (theAngle >= 0) return theAngle;

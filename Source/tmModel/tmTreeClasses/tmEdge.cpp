@@ -5,7 +5,7 @@ Purpose:      Implementation file for tmEdge class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-25
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmEdge.h"
@@ -87,7 +87,7 @@ tmEdge::tmEdge(tmTree* aTree, tmNode* node1, tmNode* node2, tmFloat aLength,
 /*****
 Return the strained length of this edge in tree units.
 *****/
-const tmFloat tmEdge::GetStrainedLength() const
+tmFloat tmEdge::GetStrainedLength() const
 {
   return mLength * (1 + mStrain);
 }
@@ -96,7 +96,7 @@ const tmFloat tmEdge::GetStrainedLength() const
 /*****
 Return the strained length of this edge scaled to paper units.
 *****/
-const tmFloat tmEdge::GetStrainedScaledLength() const
+tmFloat tmEdge::GetStrainedScaledLength() const
 {
   return mLength * (1 + mStrain) * mTree->mScale;
 }

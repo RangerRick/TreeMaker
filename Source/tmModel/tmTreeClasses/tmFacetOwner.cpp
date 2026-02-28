@@ -5,7 +5,7 @@ Purpose:      Implementation file for tmFacetOwner class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2004-04-24
-Copyright:    ©2004 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2004 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmFacetOwner.h"
@@ -221,7 +221,6 @@ void tmFacetOwner::BuildFacetsFromCreases(tmArray<tmCrease*>& aCreaseList)
       thisVertex = aCrease->mVertices.back();
       fwdFacet->mVertices.push_back(firstVertex);
       fwdFacet->mCreases.push_back(thisCrease);
-      size_t tooMany = 0;
       do {
         GetNextCreaseAndVertex(thisCrease, thisVertex, nextCrease, nextVertex);
         TMASSERT(!fwdFacet->mCreases.contains(nextCrease));
@@ -239,8 +238,6 @@ void tmFacetOwner::BuildFacetsFromCreases(tmArray<tmCrease*>& aCreaseList)
         }
         thisCrease = nextCrease;
         thisVertex = nextVertex;
-        tooMany++;
-        TMASSERT(tooMany < 100);  // To avoid infinite loops
       } while (nextVertex != firstVertex);
       fwdFacet->CalcContents();
     }
@@ -253,7 +250,6 @@ void tmFacetOwner::BuildFacetsFromCreases(tmArray<tmCrease*>& aCreaseList)
       thisVertex = aCrease->mVertices.front();
       bkdFacet->mVertices.push_back(firstVertex);
       bkdFacet->mCreases.push_back(thisCrease);
-      size_t tooMany = 0;
       do {
         GetNextCreaseAndVertex(thisCrease, thisVertex, nextCrease, nextVertex);
         TMASSERT(!bkdFacet->mCreases.contains(nextCrease));
@@ -261,7 +257,7 @@ void tmFacetOwner::BuildFacetsFromCreases(tmArray<tmCrease*>& aCreaseList)
           nextVertex == firstVertex);
         bkdFacet->mVertices.push_back(thisVertex);
         bkdFacet->mCreases.push_back(nextCrease);
-        if (nextCrease->mVertices.front() == thisVertex) 
+        if (nextCrease->mVertices.front() == thisVertex)
         {
           TMASSERT(nextCrease->mFwdFacet == 0);
           nextCrease->mFwdFacet = bkdFacet;
@@ -272,8 +268,6 @@ void tmFacetOwner::BuildFacetsFromCreases(tmArray<tmCrease*>& aCreaseList)
         }
         thisCrease = nextCrease;
         thisVertex = nextVertex;
-        tooMany++;
-        TMASSERT(tooMany < 100);
         
       } while (nextVertex != firstVertex);
       bkdFacet->CalcContents();

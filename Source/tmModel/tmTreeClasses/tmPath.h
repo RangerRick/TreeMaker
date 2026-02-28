@@ -5,7 +5,7 @@ Purpose:      Header file for class tmPath
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-25
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #ifndef _TMPATH_H_
@@ -59,9 +59,9 @@ public:
     // paths.
    return mActPaperLength;};
    
-  const tmPoint GetVector() const;
-  const tmFloat GetAngle() const;
-  const tmFloat GetPositiveAngle() const;
+  tmPoint GetVector() const;
+  tmFloat GetAngle() const;
+  tmFloat GetPositiveAngle() const;
   
   bool IsLeafPath() const {
     // A path is a leaf path if it connects two leaf nodes of the tree; it is

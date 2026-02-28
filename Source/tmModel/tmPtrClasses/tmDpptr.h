@@ -5,7 +5,7 @@ Purpose:      Header file for dangle-proof pointer class tmDpptr<T>
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-15
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #ifndef _TMDPPTR_H_
@@ -59,12 +59,11 @@ public:
   // Cast to ptr_t; only allowed is cast to ptr_t_const
   operator ptr_t_const() const {return mTarget;};
   
-  // Comparison with raw types (typically ptr_t_const, const tmDpptr<T>&, or
-  // int (null ptr))
-  template <class R>
-    bool operator==(R r) const {return mTarget == (ptr_t_const)(r);};
-  template <class R>
-    bool operator!=(R r) const {return mTarget != (ptr_t_const)(r);};
+  // Comparison with raw pointer or nullptr
+  bool operator==(ptr_t_const r) const {return mTarget == r;};
+  bool operator!=(ptr_t_const r) const {return mTarget != r;};
+  bool operator==(std::nullptr_t) const {return mTarget == nullptr;};
+  bool operator!=(std::nullptr_t) const {return mTarget != nullptr;};
   
   // Dereferencing
   T& operator *() const {return *mTarget;};

@@ -5,7 +5,7 @@ Purpose:      Implementation file for class tmTree
 Author:       Robert J. Lang
 Modified by:  
 Created:      2005-09-03
-Copyright:    ©2005 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2005 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmTree.h"
@@ -573,15 +573,13 @@ void tmTree::CalcFacetOrder()
   // Now, one by one, let the global root network absorb other pieces that are
   // incident upon it.
   while (rootNetworks.not_empty()) {
-    bool absorbedOne = false;
-    for (size_t i = 0; i < rootNetworks.size(); ++i) {    
+    for (size_t i = 0; i < rootNetworks.size(); ++i) {
       tmRootNetwork* theRootNetwork = rootNetworks[i];
       tmVertex* atVertex;
       if (globalRootNetwork->CanAbsorb(theRootNetwork, atVertex)) {
         globalRootNetwork->Absorb(theRootNetwork, atVertex);
         rootNetworks.erase_remove(theRootNetwork);
         delete theRootNetwork;
-        absorbedOne = true;
         break;
       }
     }

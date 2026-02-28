@@ -5,7 +5,7 @@ Purpose:      Implementation file for class tmPoly
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-25
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmPoly.h"
@@ -602,7 +602,6 @@ void tmPoly::GetRidgelineVertices(tmNode* frontNode, tmNode* backNode,
   tmArray<SortableRidgeVertex> vdlist;
   tmPoint p1 = frontNode->mLoc;
   tmPoint p2 = backNode->mLoc;
-  tmPoint pu = Normalize(p2 - p1);
 
   // Accumulate all node-owned vertices in the ridgeline. If there is any
   // junction node that doesn't yet have a vertex, give it one; all junction
@@ -893,7 +892,9 @@ void tmPoly::BuildPolyContents()
       // through every distinct pair of nodes in mRingNodes, but choosing an
       // order such that we go through all the consecutive pairs of mRingNodes
       // before eventually trying every possible pair.
+#ifdef TMDEBUG
       bool madeActiveCrossPath = false;
+#endif
       for (size_t dij = 1; dij < nn; ++dij)
         for (size_t i = 0; i <= nn - dij; ++i) {
           size_t j = (i + dij) % nn;
@@ -901,21 +902,21 @@ void tmPoly::BuildPolyContents()
           tmNode* nj = mRingNodes[j];
           tmNode* rni = mInsetNodes[i];
           tmNode* rnj = mInsetNodes[j];
-          
+
           // if both outer nodes map to the same inner tmNode, go on to the next
           // pair.
           if (rni == rnj) continue;
-          
+
           // If a path already exists between the two inset nodes go on to the
           // next pair.
           if (FindLeafPath(rni, rnj)) continue;
-          
+
           // if we didn't find it, need to create a new path.
           tmPath* outsetPath = mPolyOwner->FindAnyPath(ni, nj);
           TMASSERT(outsetPath);
           tmFloat iReduction = h * mr[i];
           tmFloat jReduction = h * mr[j];
-    
+
           // When we create the new path, we want it in the same orientation as
           // the path from which it is inset, so order of rni, rnj is important.
           tmPath* thePath;
@@ -931,11 +932,11 @@ void tmPoly::BuildPolyContents()
             thePath->mFrontReduction = jReduction;
             thePath->mBackReduction = iReduction;
           }
-          
+
           // Connect it to the ring nodes it was created from
           rni->mLeafPaths.push_back(thePath);
           rnj->mLeafPaths.push_back(thePath);
-          
+
           // Set length-related variables
           thePath->mOutsetPath = outsetPath;
           thePath->mMinPaperLength = outsetPath->mMinPaperLength -
@@ -943,29 +944,31 @@ void tmPoly::BuildPolyContents()
           thePath->mActPaperLength = Mag((rni->mLoc) - (rnj->mLoc));
           thePath->mMinTreeLength = thePath->mMinPaperLength / mTree->mScale;
           thePath->mActTreeLength = thePath->mActPaperLength / mTree->mScale;
-          
+
           // Set active status; we're definitely active if the path we're inset
           // from is active, but could be active even if our outset path is not.
           thePath->mIsActivePath = outsetPath->IsActivePath();
-    
+
           // if the reduced path length is equal to its physical length, it's
           // active whether its outset path was active or not. (If it's outset
           // path was not active and this one is, then it's an active cross
           // path.)
           thePath->mIsActivePath |= thePath->TestIsActive(
             thePath->mActPaperLength, thePath->mMinPaperLength);
-    
+
           // if the nodes are consecutive, the inset path is a border path and
           // is therefore also a polygon path. If it isn't a border path, note
           // whether it's active.
           if (dij == 1) thePath->mIsBorderPath = true;
+#ifdef TMDEBUG
           else madeActiveCrossPath |= thePath->IsActivePath();
-          
+#endif
+
           // If it's either active or border, it's a polygon path
-          thePath->mIsPolygonPath = 
+          thePath->mIsPolygonPath =
             thePath->IsActivePath() || thePath->IsBorderPath();
         }
-      
+
 #ifdef TMDEBUG
       // count the number of polygon paths we created
       size_t numPolygonPaths = 0;
@@ -1461,7 +1464,7 @@ void tmPoly::Getv5Self(istream& is)
 /*****
 Put a poly in version 4 format
 *****/
-void tmPoly::Putv4Self(ostream& os)
+void tmPoly::Putv4Self(ostream& /*os*/)
 {
   TMFAIL("tmPoly::Putv4Self");
 }

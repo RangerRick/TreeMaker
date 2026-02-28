@@ -5,7 +5,7 @@ Purpose:      Implementation file for tmConditionPathCombo class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-12-05
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmConditionPathCombo.h"
@@ -65,7 +65,7 @@ void tmConditionPathCombo::SetPath(tmPath* aPath)
 {
   TMASSERT(aPath);
   TMASSERT(aPath->mIsLeafPath);
-  if (mPath = aPath) return;
+  if (mPath == aPath) return;
   tmTreeCleaner tc(mTree);
   mPath = aPath;
   mNode1 = aPath->mNodes.front();
