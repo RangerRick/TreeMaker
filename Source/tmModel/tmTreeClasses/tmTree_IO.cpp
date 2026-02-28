@@ -5,7 +5,7 @@ Purpose:      Implementation file for tmTree I/O routines
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-12-07
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmTree.h"
@@ -289,7 +289,15 @@ void tmTree::Getv5Self(istream& is)
   GetPOD(is, numCreases);
   GetPOD(is, numFacets);
   GetPOD(is, numConditions);
-  
+
+  // Sanity-check part counts to prevent unbounded allocation from corrupt files
+  const size_t kMaxParts = 1000000;
+  if (numNodes > kMaxParts || numEdges > kMaxParts || numPaths > kMaxParts ||
+      numPolys > kMaxParts || numVertices > kMaxParts ||
+      numCreases > kMaxParts || numFacets > kMaxParts ||
+      numConditions > kMaxParts)
+    throw EX_IO_BAD_TOKEN("part count exceeds maximum");
+
   // Create the proper number of blank tmParts, except Conditions, which are
   // created on the fly
   for (size_t i = 0; i < numNodes; ++i) new tmNode(this);
@@ -333,9 +341,10 @@ void tmTree::Getv5Self(istream& is)
   
   // If we didn't create as many conditions as there were in the file, throw
   // an exception.
-  size_t numMissed = numConditions - mConditions.size();
-  if (numMissed) 
+  if (mConditions.size() < numConditions) {
+    size_t numMissed = numConditions - mConditions.size();
     throw EX_IO_UNRECOGNIZED_CONDITION(numMissed);
+  }
 }
 
 
@@ -508,7 +517,14 @@ void tmTree::Getv4Self(istream& is)
   GetPOD(is, numVertices);
   GetPOD(is, numCreases);
   GetPOD(is, numConditions);
-  
+
+  // Sanity-check part counts to prevent unbounded allocation from corrupt files
+  const size_t kMaxParts = 1000000;
+  if (numNodes > kMaxParts || numEdges > kMaxParts || numPaths > kMaxParts ||
+      numPolys > kMaxParts || numVertices > kMaxParts ||
+      numCreases > kMaxParts || numConditions > kMaxParts)
+    throw EX_IO_BAD_TOKEN("part count exceeds maximum");
+
   // Create the proper number of blank tmParts, except Conditions, which are
   // created on the fly
   for (size_t i = 0; i < numNodes; ++i) new tmNode(this);
@@ -525,7 +541,7 @@ void tmTree::Getv4Self(istream& is)
   for (size_t i = 0; i < numPolys; ++i) mPolys[i]->Getv4Self(is);
   for (size_t i = 0; i < numVertices; ++i) mVertices[i]->Getv4Self(is);
   for (size_t i = 0; i < numCreases; ++i) mCreases[i]->Getv4Self(is);
-  
+
   // Conditions are special; some might have been ignored
   for (size_t i = 0; i < numConditions; ++i) Makev4Condition(is);
 
@@ -534,18 +550,20 @@ void tmTree::Getv4Self(istream& is)
   GetPtrArray(is, mOwnedEdges);
   GetPtrArray(is, mOwnedPaths);
   GetPtrArray(is, mOwnedPolys);
-  
+
   // Eat remaining newlines/whitespace
   ConsumeTrailingSpace(is);
-  
+
   // Recalculate the feasibility flag, which wasn't stored in version 4 files.
   for (size_t i = 0; i < mConditions.size(); ++i)
     mConditions[i]->CalcFeasibility();
-  
+
   // If we didn't create as many conditions as there were in the file, throw
   // an exception.
-  size_t numMissed = numConditions - mConditions.size();
-  if (numMissed) throw EX_IO_UNRECOGNIZED_CONDITION(numMissed);
+  if (mConditions.size() < numConditions) {
+    size_t numMissed = numConditions - mConditions.size();
+    throw EX_IO_UNRECOGNIZED_CONDITION(numMissed);
+  }
 }
 
 
