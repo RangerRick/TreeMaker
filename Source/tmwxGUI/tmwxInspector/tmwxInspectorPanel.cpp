@@ -5,7 +5,7 @@ Purpose:      Source file for any panel that goes in the Inspector
 Author:       Robert J. Lang
 Modified by:  
 Created:      2005-12-07
-Copyright:    ©2005 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2005 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 // Additional wxWidgets classes
@@ -39,14 +39,15 @@ tmwxInspectorPanel::tmwxInspectorPanel(wxWindow* parent)
 /*****
 Add a tmwxStaticText caption and tmwxTextCtrl in a single row.
 *****/
-void tmwxInspectorPanel::AddTextPair(const wxString& caption, 
+void tmwxInspectorPanel::AddTextPair(const wxString& caption,
   tmwxTextCtrl*& textctrl, const wxString& format)
 {
-  wxGridSizer* gridsizer = new wxGridSizer(2);
-  gridsizer->Add(new tmwxStaticText(this, 11, caption), 
+  wxFlexGridSizer* gridsizer = new wxFlexGridSizer(2);
+  gridsizer->AddGrowableCol(1, 1);
+  gridsizer->Add(new tmwxStaticText(this, 11, caption),
    0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL | wxTOP|wxBOTTOM, 2);
-  gridsizer->Add(textctrl = new tmwxTextCtrl(this, format), 
-   0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL | wxTOP|wxBOTTOM, 2);
+  gridsizer->Add(textctrl = new tmwxTextCtrl(this, format),
+   1, wxEXPAND|wxALIGN_CENTER_VERTICAL | wxTOP|wxBOTTOM, 2);
   mPanelSizer->Add(gridsizer, wxSizerFlags(1).Expand());
 }
 
@@ -65,14 +66,15 @@ void tmwxInspectorPanel::AddCheckBox(wxCheckBox*& checkbox,
 /*****
 Add a twmxCheckboxSmall and a twmxTextCtrl in a single row.
 *****/
-void tmwxInspectorPanel::AddCheckPair(wxCheckBox*& checkbox, 
+void tmwxInspectorPanel::AddCheckPair(wxCheckBox*& checkbox,
   const wxString& caption, tmwxTextCtrl*& textctrl, const wxString format)
 {
-  wxGridSizer* gridsizer = new wxGridSizer(2);
-  gridsizer->Add(checkbox = new tmwxCheckBoxSmall(this, caption), 
+  wxFlexGridSizer* gridsizer = new wxFlexGridSizer(2);
+  gridsizer->AddGrowableCol(1, 1);
+  gridsizer->Add(checkbox = new tmwxCheckBoxSmall(this, caption),
    0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL | wxTOP|wxBOTTOM, 2);
-  gridsizer->Add(textctrl = new tmwxTextCtrl(this, format), 
-   0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL | wxTOP|wxBOTTOM, 2);
+  gridsizer->Add(textctrl = new tmwxTextCtrl(this, format),
+   1, wxEXPAND|wxALIGN_CENTER_VERTICAL | wxTOP|wxBOTTOM, 2);
   mPanelSizer->Add(gridsizer, wxSizerFlags(1).Expand());
 }
 
