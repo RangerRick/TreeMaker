@@ -75,6 +75,7 @@ Change the width of the paper.
 *****/
 void tmTree::SetPaperWidth(const tmFloat& aWidth)
 {
+  if (aWidth <= 0) return;
   if (mPaperWidth == aWidth) return;
   tmTreeCleaner tc(this);
   mPaperWidth = aWidth;
@@ -86,6 +87,7 @@ Change the height of the paper.
 *****/
 void tmTree::SetPaperHeight(const tmFloat& aHeight)
 {
+  if (aHeight <= 0) return;
   if (mPaperHeight == aHeight) return;
   tmTreeCleaner tc(this);
   mPaperHeight = aHeight;
