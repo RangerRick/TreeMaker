@@ -306,7 +306,7 @@ facet. Note that this only works after the facets have been fully constructed.
 *****/
 bool tmCrease::IsBorderCrease() const
 {
-  return (mFwdFacet == 0 || mBkdFacet == 0);
+  return (mFwdFacet == nullptr || mBkdFacet == nullptr);
 }
 
 
@@ -368,7 +368,7 @@ of the two facets on either side and their color orientation.
 *****/
 void tmCrease::CalcFold()
 {
-  if (mFwdFacet == 0 || mBkdFacet == 0)
+  if (mFwdFacet == nullptr || mBkdFacet == nullptr)
     mFold = BORDER;
   else if (mFwdFacet->mColor == mBkdFacet->mColor)
     mFold = FLAT;

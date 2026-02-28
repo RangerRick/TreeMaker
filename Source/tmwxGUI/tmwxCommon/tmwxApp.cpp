@@ -5,7 +5,7 @@ Purpose:      Source file for TreeMaker application class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-15
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmwxApp.h"
@@ -345,13 +345,7 @@ bool tmwxApp::OnInit(void)
     );
 #endif
 
-#ifdef __WXMAC__
-  wxFileName::MacRegisterDefaultTypeAndCreator(
-    "tmd5", // extension
-    'TEXT', // type
-    'TrM5'  // creator
-    );
-#endif // __WXMAC__
+  // MacRegisterDefaultTypeAndCreator removed in wx3; no longer needed
 
 #ifdef __WXMAC__
   // Macs show a menu bar even when there are no document windows. 
@@ -1135,7 +1129,7 @@ bool tmwxApp::ProcessEvent(wxEvent& event)
   wxWindow* topWindow = wxTheApp->GetTopWindow();
   if (mHelp && topWindow == (wxWindow*)(mHelp->mHtmlHelpFrame)) {
     eventStack.push_back(&event);
-    if (topWindow && topWindow->ProcessEvent(event)) {
+    if (topWindow && topWindow->GetEventHandler()->ProcessEvent(event)) {
       eventStack.pop_back();
       return true;
     }
@@ -1466,7 +1460,7 @@ bool tmwxPrefsDialog::TransferDataFromWindow()
   tmNLCO::Algorithm algorithm = 
     tmNLCO::Algorithm(mAlgorithm->GetCurrentSelection());
   tmNLCO::SetAlgorithm(algorithm);
-  wxConfig::Get()->Write(ALGORITHM_KEY, algorithm);
+  wxConfig::Get()->Write(ALGORITHM_KEY, static_cast<int>(algorithm));
   
   int showAboutAtStartup = mShowAboutAtStartup->GetValue();
   wxConfig::Get()->Write(SHOW_ABOUT_AT_STARTUP_KEY, showAboutAtStartup);

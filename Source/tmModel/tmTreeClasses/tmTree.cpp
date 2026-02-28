@@ -5,7 +5,7 @@ Purpose:      Implementation file for class tmTree
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-21
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmTree.h"
@@ -2229,12 +2229,12 @@ void tmTree::CalcPolygonValidity(tmArray<tmNode*>& leafNodes)
       tmPath* thePath = mOwnedPaths[i];
       if (!thePath->IsPolygonPath()) continue;
       if (thePath->IsBorderPath()) {
-        if (thePath->mFwdPoly == 0 && thePath->mBkdPoly == 0) {
+        if (thePath->mFwdPoly == nullptr && thePath->mBkdPoly == nullptr) {
           mIsPolygonValid = false;
           break;
         }
       }
-      else if (thePath->mFwdPoly == 0 || thePath->mBkdPoly == 0) {
+      else if (thePath->mFwdPoly == nullptr || thePath->mBkdPoly == nullptr) {
         mIsPolygonValid = false;
         break;
       }

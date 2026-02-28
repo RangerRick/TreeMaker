@@ -5,7 +5,7 @@ Purpose:      Header file for TreeMaker view class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-15
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #ifndef _TMWXVIEW_H_
@@ -38,7 +38,7 @@ public:
   tmwxDoc* GetDoc() const { return mDoc; };
   tmwxDesignFrame* GetDesignFrame() const { return mDesignFrame; };
   tmwxDesignCanvas* GetDesignCanvas() const { return mDesignCanvas; };
-  tmTree* const GetTree() const;
+  tmTree* GetTree() const;
   
   // Printing
   virtual wxPrintout* OnCreatePrintout();

@@ -5,7 +5,7 @@ Purpose:      Implementation file for TreeMaker design view canvas class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-15
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmwxDesignCanvas.h"
@@ -176,7 +176,7 @@ tmwxDesignCanvas::tmwxDesignCanvas(tmwxDesignFrame* aFrame, wxSize aSize)
 /*****
 Return a ptr to the tree.
 *****/
-tmTree* const tmwxDesignCanvas::GetTree() const 
+tmTree* tmwxDesignCanvas::GetTree() const
 {
   return mDoc->mTree;
 }
@@ -1045,7 +1045,7 @@ void tmwxDesignCanvas::DrawPaper<tmwxDesignCanvas::Text>(wxDC& dc)
     dc.SetTextForeground(*wxBLACK);
     wxPoint p1 = TreeToDC(tmPoint(0, theTree->GetPaperHeight()));
     p1.y -= PixelsToDC(HEADER_OFFSET);
-    mDoc->GetPrintableName(text);
+    text = mDoc->GetUserReadableName();
     dc.DrawText(text, p1);
     wxPoint p2 = TreeToDC(tmPoint(theTree->GetPaperWidth(), 
       theTree->GetPaperHeight()));
@@ -1343,7 +1343,7 @@ void tmwxDesignCanvas::DrawPart<tmwxDesignCanvas::Text, tmPath>(
   // Draw the actual path length and minimum path length in tree units
   if (mViewSettings.mShowPathLengths) {
 #ifdef __WXMAC__
-    text.Printf(wxT("%.4f³%.4f"), 
+    text.Printf(wxT("%.4fâ‰¥%.4f"), 
 #else
     text.Printf(wxT("%.4f>=%.4f"), 
 #endif

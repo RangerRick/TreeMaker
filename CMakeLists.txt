@@ -154,6 +154,7 @@ if(TM_BUILD_GUI)
   file(GLOB TMWX_LOGFRAME_SRC     ${TM_SOURCE_DIR}/tmwxGUI/tmwxLogFrame/*.cpp)
 
   set(TMWX_SOURCES
+    ${TM_SOURCE_DIR}/tmHeader.cpp
     ${TMWX_COMMON_SRC}
     ${TMWX_DOCVIEW_SRC}
     ${TMWX_INSPECTOR_SRC}

@@ -5,7 +5,7 @@ Purpose:      Implementation file for tmConditionEdgesSameStrain class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-12-04
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmConditionEdgesSameStrain.h"
@@ -75,7 +75,7 @@ Return true if the referenced parts still exist
 *****/  
 bool tmConditionEdgesSameStrain::IsValidCondition() const
 {
-  return ((mEdge1 != 0) && (mEdge2 != 0));
+  return ((mEdge1 != nullptr) && (mEdge2 != nullptr));
 }
 
 

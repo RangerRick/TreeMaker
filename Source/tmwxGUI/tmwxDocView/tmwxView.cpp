@@ -5,7 +5,7 @@ Purpose:      Source file for TreeMaker view class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-15
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmwxView.h"
@@ -43,7 +43,7 @@ tmwxView::~tmwxView()
 /*****
 Return a ptr to the tree.
 *****/
-tmTree* const tmwxView::GetTree() const 
+tmTree* tmwxView::GetTree() const
 {
   return mDoc->mTree;
 }

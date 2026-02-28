@@ -5,7 +5,7 @@ Purpose:      Implementation file for class tmwxHtmlHelpController
 Author:       Robert J. Lang
 Modified by:  
 Created:      2005-11-23
-Copyright:    ©2005 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2005 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmwxHtmlHelpController.h"
@@ -53,7 +53,7 @@ wxWindow* tmwxHtmlHelpController::CreateHelpWindow()
   // to replace the menu bar partway through.
   if (m_helpFrame) {
     m_helpFrame->Raise();
-    return ;
+    return m_helpFrame;
   }
   if (m_Config == NULL) {
     m_Config = wxConfigBase::Get(false);

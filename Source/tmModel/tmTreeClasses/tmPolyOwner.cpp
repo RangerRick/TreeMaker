@@ -72,7 +72,7 @@ direction.
 *****/
 bool tmPolyOwner::CanStartPolyFwd(tmPath* aPath, const tmPoint& centroid)
 {
-  if (aPath->mFwdPoly != 0) return false;
+  if (aPath->mFwdPoly != nullptr) return false;
   if (!aPath->IsBorderPath()) return true;
   return AreCCW(aPath->mNodes.front()->mLoc, 
     aPath->mNodes.back()->mLoc, centroid);
@@ -85,7 +85,7 @@ direction.
 *****/
 bool tmPolyOwner::CanStartPolyBkd(tmPath* aPath, const tmPoint& centroid)
 {
-  if (aPath->mBkdPoly != 0) return false;
+  if (aPath->mBkdPoly != nullptr) return false;
   if (!aPath->IsBorderPath()) return true;
   return AreCW(aPath->mNodes.front()->mLoc, 
     aPath->mNodes.back()->mLoc, centroid);

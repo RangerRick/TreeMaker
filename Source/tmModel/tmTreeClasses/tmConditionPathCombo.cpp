@@ -193,7 +193,7 @@ Return true if the tmParts referenced by this tmCondition still exist
 *****/  
 bool tmConditionPathCombo::IsValidCondition() const
 {
-  return (mNode1 != 0) && (mNode2 != 0) && (mPath != 0) && mPath->IsLeafPath();
+  return (mNode1 != nullptr) && (mNode2 != nullptr) && (mPath != nullptr) && mPath->IsLeafPath();
 }
 
 

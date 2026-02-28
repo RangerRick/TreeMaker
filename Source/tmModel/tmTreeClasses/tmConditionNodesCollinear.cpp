@@ -5,7 +5,7 @@ Purpose:      Implementation file for tmConditionNodesCollinear class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-12-04
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmConditionNodesCollinear.h"
@@ -84,9 +84,9 @@ Return true if the referenced parts still exist
 *****/
 bool tmConditionNodesCollinear::IsValidCondition() const
 {
-  return (mNode1 != 0) && (mNode1->IsLeafNode()) &&
-    (mNode2 != 0) && (mNode2->IsLeafNode()) &&
-    (mNode3 != 0) && (mNode3->IsLeafNode());
+  return (mNode1 != nullptr) && (mNode1->IsLeafNode()) &&
+    (mNode2 != nullptr) && (mNode2->IsLeafNode()) &&
+    (mNode3 != nullptr) && (mNode3->IsLeafNode());
 }
 
 

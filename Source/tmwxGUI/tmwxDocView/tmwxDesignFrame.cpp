@@ -5,7 +5,7 @@ Purpose:      Implementation file for class tmwxDesignFrame
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-15
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmwxDesignFrame.h"
@@ -61,7 +61,7 @@ also need to update our floating windows with the currently-active palette.
 *****/
 void tmwxDesignFrame::OnActivate(wxActivateEvent& event)
 {
-  tmwxDocChildFrame::OnActivate(event); // let base class finish handling the event.
+  event.Skip(); // let the framework handle activation
 
   if (event.GetActive()) {
     // Make sure the application now knows we're the top window in order to

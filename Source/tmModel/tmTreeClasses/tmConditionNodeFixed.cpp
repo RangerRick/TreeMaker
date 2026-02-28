@@ -5,7 +5,7 @@ Purpose:      Implementation file for tmConditionNodeFixed class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-12-04
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmConditionNodeFixed.h"
@@ -106,7 +106,7 @@ Return true if the referenced parts still exist
 *****/  
 bool tmConditionNodeFixed::IsValidCondition() const
 {
-  return (mNode != 0) && (mNode->IsLeafNode());
+  return (mNode != nullptr) && (mNode->IsLeafNode());
 }
 
 

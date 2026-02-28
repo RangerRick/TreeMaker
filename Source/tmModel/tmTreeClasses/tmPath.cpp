@@ -171,8 +171,8 @@ were attached to it. We rely on this behavior in many places.
 *****/
 tmPath::~tmPath()
 {
-  if (mFwdPoly != 0) delete (tmPoly*) mFwdPoly;
-  if (mBkdPoly != 0) delete (tmPoly*) mBkdPoly;
+  if (mFwdPoly != nullptr) delete (tmPoly*) mFwdPoly;
+  if (mBkdPoly != nullptr) delete (tmPoly*) mBkdPoly;
 }
 
 

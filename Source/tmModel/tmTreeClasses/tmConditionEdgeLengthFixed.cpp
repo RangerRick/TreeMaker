@@ -5,7 +5,7 @@ Purpose:      Implementation file for tmConditionEdgeLengthFixed class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-12-04
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmConditionEdgeLengthFixed.h"
@@ -63,7 +63,7 @@ Return true if the referenced parts still exist
 *****/  
 bool tmConditionEdgeLengthFixed::IsValidCondition() const
 {
-  return (mEdge != 0);
+  return (mEdge != nullptr);
 }
 
 

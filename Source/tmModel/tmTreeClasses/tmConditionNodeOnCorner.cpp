@@ -5,7 +5,7 @@ Purpose:      Header file for tmConditionNodeOnCorner class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-12-04
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmConditionNodeOnCorner.h"
@@ -64,7 +64,7 @@ Return true if the referenced parts still exist
 *****/    
 bool tmConditionNodeOnCorner::IsValidCondition() const
 {
-  return (mNode != 0) && (mNode->IsLeafNode());
+  return (mNode != nullptr) && (mNode->IsLeafNode());
 }
 
 

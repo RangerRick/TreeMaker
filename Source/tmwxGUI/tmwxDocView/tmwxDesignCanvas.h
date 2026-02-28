@@ -5,7 +5,7 @@ Purpose:      Header file for TreeMaker design view canvas class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-15
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #ifndef _TMWXDESIGNCANVAS_H_
@@ -48,7 +48,7 @@ public:
     mViewSettings = viewSettings; };
   
   // tmTree object drawing
-  tmTree* const GetTree() const;
+  tmTree* GetTree() const;
 
   // Paper size
   tmFloat GetPaperSize() const { return mPaperSize; };

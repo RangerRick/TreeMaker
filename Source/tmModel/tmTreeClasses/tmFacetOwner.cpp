@@ -229,11 +229,11 @@ void tmFacetOwner::BuildFacetsFromCreases(tmArray<tmCrease*>& aCreaseList)
         fwdFacet->mVertices.push_back(thisVertex);
         fwdFacet->mCreases.push_back(nextCrease);
         if (nextCrease->mVertices.front() == thisVertex) {
-          TMASSERT(nextCrease->mFwdFacet == 0);
+          TMASSERT(nextCrease->mFwdFacet == nullptr);
           nextCrease->mFwdFacet = fwdFacet;
         }
         else {
-          TMASSERT(nextCrease->mBkdFacet == 0);
+          TMASSERT(nextCrease->mBkdFacet == nullptr);
           nextCrease->mBkdFacet = fwdFacet;
         }
         thisCrease = nextCrease;
@@ -259,11 +259,11 @@ void tmFacetOwner::BuildFacetsFromCreases(tmArray<tmCrease*>& aCreaseList)
         bkdFacet->mCreases.push_back(nextCrease);
         if (nextCrease->mVertices.front() == thisVertex)
         {
-          TMASSERT(nextCrease->mFwdFacet == 0);
+          TMASSERT(nextCrease->mFwdFacet == nullptr);
           nextCrease->mFwdFacet = bkdFacet;
         }
         else {
-          TMASSERT(nextCrease->mBkdFacet == 0);
+          TMASSERT(nextCrease->mBkdFacet == nullptr);
           nextCrease->mBkdFacet = bkdFacet;
         }
         thisCrease = nextCrease;

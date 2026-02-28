@@ -5,7 +5,7 @@ Purpose:      Implementation file for tmConditionNodeCombo class
 Author:       Robert J. Lang
 Modified by:  
 Created:      2004-04-22
-Copyright:    ©2004 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2004 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmConditionNodeCombo.h"
@@ -150,7 +150,7 @@ Return true if the referenced parts still exist
 *****/  
 bool tmConditionNodeCombo::IsValidCondition() const
 {
-  return (mNode != 0) && (mNode->IsLeafNode());
+  return (mNode != nullptr) && (mNode->IsLeafNode());
 }
 
 
