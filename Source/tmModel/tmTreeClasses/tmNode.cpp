@@ -105,6 +105,7 @@ void tmNode::SetLabel(const char* aLabel)
 {
   TMASSERT(strlen(aLabel) <= MAX_LABEL_LEN);
   strncpy(mLabel, aLabel, MAX_LABEL_LEN);
+  mLabel[MAX_LABEL_LEN] = '\0';
 }
 
 

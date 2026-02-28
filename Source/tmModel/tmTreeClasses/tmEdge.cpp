@@ -74,7 +74,8 @@ tmEdge::tmEdge(tmTree* aTree, tmNode* node1, tmNode* node2, tmFloat aLength,
   
   // Set settings
   mLength = aLength;
-  strcpy(mLabel, aLabel);
+  strncpy(mLabel, aLabel, MAX_LABEL_LEN);
+  mLabel[MAX_LABEL_LEN] = '\0';
 
   // Fill with tmNode references
   mNodes.push_back(node1);
@@ -111,6 +112,7 @@ void tmEdge::SetLabel(const char* aLabel)
 {
   TMASSERT(strlen(aLabel) <= MAX_LABEL_LEN);
   strncpy(mLabel, aLabel, MAX_LABEL_LEN);
+  mLabel[MAX_LABEL_LEN] = '\0';
 }
 
 
