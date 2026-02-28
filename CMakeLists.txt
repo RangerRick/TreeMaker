@@ -217,6 +217,8 @@ if(TM_BUILD_GUI)
       COMMAND ${CMAKE_COMMAND} -E copy ${HELP_ZIP} ${SHARED_SUPPORT}/
       COMMAND ${CMAKE_COMMAND} -E copy
         "${CMAKE_SOURCE_DIR}/Source/images/SplashScreen.png" ${SHARED_SUPPORT}/
+      COMMAND ${CMAKE_COMMAND} -E copy
+        "${CMAKE_SOURCE_DIR}/Source/about/about.htm" ${SHARED_SUPPORT}/
       COMMENT "Bundling resources into SharedSupport"
     )
   endif()
