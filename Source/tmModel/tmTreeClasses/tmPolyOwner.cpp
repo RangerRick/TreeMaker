@@ -205,7 +205,9 @@ void tmPolyOwner::BuildPolysFromPaths(tmArray<tmPath*>& aPathList,
       thisNode = aPath->mNodes.back();
       aPoly->mRingNodes.push_back(firstNode);
       aPoly->mRingPaths.push_back(thisPath);
+      size_t fwdIter = 0;
       do {
+        TMASSERT(++fwdIter < 10000);
         GetNextPathAndNode(thisPath, thisNode, nextPath, nextNode);
         aPoly->mRingNodes.push_back(thisNode);
         aPoly->mRingPaths.push_back(nextPath);
@@ -224,7 +226,9 @@ void tmPolyOwner::BuildPolysFromPaths(tmArray<tmPath*>& aPathList,
       thisNode = aPath->mNodes.front();
       aPoly->mRingNodes.push_back(firstNode);
       aPoly->mRingPaths.push_back(thisPath);
+      size_t bkdIter = 0;
       do {
+        TMASSERT(++bkdIter < 10000);
         GetNextPathAndNode(thisPath, thisNode, nextPath, nextNode);
         aPoly->mRingNodes.push_back(thisNode);
         aPoly->mRingPaths.push_back(nextPath);

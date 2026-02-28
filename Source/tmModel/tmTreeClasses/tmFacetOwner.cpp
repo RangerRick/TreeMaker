@@ -221,7 +221,9 @@ void tmFacetOwner::BuildFacetsFromCreases(tmArray<tmCrease*>& aCreaseList)
       thisVertex = aCrease->mVertices.back();
       fwdFacet->mVertices.push_back(firstVertex);
       fwdFacet->mCreases.push_back(thisCrease);
+      size_t fwdIter = 0;
       do {
+        TMASSERT(++fwdIter < 10000);
         GetNextCreaseAndVertex(thisCrease, thisVertex, nextCrease, nextVertex);
         TMASSERT(!fwdFacet->mCreases.contains(nextCrease));
         TMASSERT((!fwdFacet->mVertices.contains(nextVertex)) || \
@@ -250,7 +252,9 @@ void tmFacetOwner::BuildFacetsFromCreases(tmArray<tmCrease*>& aCreaseList)
       thisVertex = aCrease->mVertices.front();
       bkdFacet->mVertices.push_back(firstVertex);
       bkdFacet->mCreases.push_back(thisCrease);
+      size_t bkdIter = 0;
       do {
+        TMASSERT(++bkdIter < 10000);
         GetNextCreaseAndVertex(thisCrease, thisVertex, nextCrease, nextVertex);
         TMASSERT(!bkdFacet->mCreases.contains(nextCrease));
         TMASSERT((!bkdFacet->mVertices.contains(nextVertex)) || \
@@ -268,7 +272,6 @@ void tmFacetOwner::BuildFacetsFromCreases(tmArray<tmCrease*>& aCreaseList)
         }
         thisCrease = nextCrease;
         thisVertex = nextVertex;
-        
       } while (nextVertex != firstVertex);
       bkdFacet->CalcContents();
     }
