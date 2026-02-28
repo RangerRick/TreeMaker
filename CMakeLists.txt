@@ -198,6 +198,7 @@ if(TM_BUILD_GUI)
       MACOSX_BUNDLE_BUNDLE_VERSION "${PROJECT_VERSION}"
       MACOSX_BUNDLE_SHORT_VERSION_STRING "${PROJECT_VERSION}"
       MACOSX_BUNDLE_GUI_IDENTIFIER "com.langorigami.treemaker"
+      MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/cmake/Info.plist.in"
     )
     # Build help.zip from Source/help and install into SharedSupport
     set(HELP_SRC_DIR "${CMAKE_SOURCE_DIR}/Source/help")
