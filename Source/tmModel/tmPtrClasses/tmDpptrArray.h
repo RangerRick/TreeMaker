@@ -355,7 +355,7 @@ template <class T>
 void tmDpptrArray<T>::intersect_with(const tmArray<T*>& aList)
 {
   for (std::size_t i = 0; i < this->size(); ++i) {
-    T* pt = aList[i];
+    T* pt = (*this)[i];
     if (!aList.contains(pt)) {
       erase_remove(pt);
       --i;
