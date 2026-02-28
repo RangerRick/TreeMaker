@@ -90,11 +90,11 @@ void tmOnAssert(int cond, const TM_UI_CHAR* szFile, int nLine,
   #else
     char msg[1024];
     if (szMsg)
-      sprintf(msg, "Failed assertion in file %s "
+      snprintf(msg, sizeof(msg), "Failed assertion in file %s "
         "at line %d. Failed condition was:\n"
         "  %s: %s", szFile, nLine, szCond, szMsg);
     else
-      sprintf(msg, "Failed assertion in file %s "
+      snprintf(msg, sizeof(msg), "Failed assertion in file %s "
         "at line %d. Failed condition was:\n"
         "  %s", szFile, nLine, szCond);
     cout << msg << endl;
@@ -112,8 +112,9 @@ void tmOnAssert(int cond, const char* szFile, int nLine,
 {
   wxString strFile = wxString::FromAscii(szFile);
   wxString strCond = wxString::FromAscii(szCond);
-  wxString strMsg  = wxString::FromAscii(szMsg);
-  tmOnAssert(cond, strFile.wc_str(), nLine, strCond.wc_str(), strMsg.wc_str());
+  wxString strMsg  = szMsg ? wxString::FromAscii(szMsg) : wxString();
+  tmOnAssert(cond, strFile.wc_str(), nLine, strCond.wc_str(),
+    szMsg ? strMsg.wc_str() : nullptr);
 }
 #endif // wxUSE_UNICODE
 
