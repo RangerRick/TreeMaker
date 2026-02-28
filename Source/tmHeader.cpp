@@ -14,6 +14,7 @@ Copyright:    �2003 Robert J. Lang. All Rights Reserved.
 #endif // TMWX
 
 #include <cstdlib>
+#include <filesystem>
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -52,12 +53,13 @@ Dump two tree state stringstreams to crash files.
 *****/
 void DumpTreeState()
 {
-  ofstream fout1("pre_build_creases.tmd5");
-  fout1 << DbgPreBuildCreasesStringStream().str();
-  fout1.close();
-  ofstream fout2("pre_cleanup.tmd5");
-  fout2 << DbgPreCleanupStringStream().str();
-  fout2.close();
+  auto tmpDir = std::filesystem::temp_directory_path();
+  ofstream fout1(tmpDir / "pre_build_creases.tmd5");
+  if (fout1)
+    fout1 << DbgPreBuildCreasesStringStream().str();
+  ofstream fout2(tmpDir / "pre_cleanup.tmd5");
+  if (fout2)
+    fout2 << DbgPreCleanupStringStream().str();
 }
 
 
