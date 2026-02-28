@@ -259,8 +259,10 @@ bool tmwxDoc::OnCloseDocument()
   bool ret = wxDocument::OnCloseDocument();
   size_t num_docs = gDocManager->GetDocuments().GetCount();
   if (num_docs == 1) {
-    gViewSettingsFrame->SetSelection();
-    gFoldedFormFrame->SetDoc(0);
+    if (gViewSettingsFrame)
+      gViewSettingsFrame->SetSelection();
+    if (gFoldedFormFrame)
+      gFoldedFormFrame->SetDoc(0);
   }
   return ret;
 }

@@ -1057,17 +1057,24 @@ void tmwxApp::SetPalettes(tmwxDoc* doc)
 {
   gDocManager->SetCurrentDocumentLocal(doc);
   if (doc) {
-    gInspectorFrame->DispatchSetSelection(doc->mTree, doc->mSelection);
-    gViewSettingsFrame->
-      SetSelection(&doc->GetDesignCanvas()->GetEditableViewSettings());
+    if (gInspectorFrame)
+      gInspectorFrame->DispatchSetSelection(doc->mTree, doc->mSelection);
+    if (gViewSettingsFrame)
+      gViewSettingsFrame->
+        SetSelection(&doc->GetDesignCanvas()->GetEditableViewSettings());
   }
   else {
-    gInspectorFrame->SetSelection();
-    gViewSettingsFrame->SetSelection();
+    if (gInspectorFrame)
+      gInspectorFrame->SetSelection();
+    if (gViewSettingsFrame)
+      gViewSettingsFrame->SetSelection();
   }
-  gFoldedFormFrame->SetDoc(doc);
-  gInspectorFrame->SetOnTopStyle(doc!=NULL);
-  gViewSettingsFrame->SetOnTopStyle(doc!=NULL);
+  if (gFoldedFormFrame)
+    gFoldedFormFrame->SetDoc(doc);
+  if (gInspectorFrame)
+    gInspectorFrame->SetOnTopStyle(doc!=NULL);
+  if (gViewSettingsFrame)
+    gViewSettingsFrame->SetOnTopStyle(doc!=NULL);
 }
 
 
