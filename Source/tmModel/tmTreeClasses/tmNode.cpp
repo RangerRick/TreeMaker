@@ -5,11 +5,13 @@ Purpose:      Implementation file for class tmNode
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-25
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #include "tmNode.h"
 #include "tmModel.h"
+
+#include <functional>
 
 using namespace std;
 
@@ -279,8 +281,8 @@ Return the number of polygon paths incident upon this tmNode.
 *****/
 size_t tmNode::GetNumPolygonPaths() const
 {
-  return count_if(mLeafPaths.begin(), mLeafPaths.end(),
-    mem_fun(&tmPath::IsPolygonPath));
+  return std::count_if(mLeafPaths.begin(), mLeafPaths.end(),
+    std::mem_fn(&tmPath::IsPolygonPath));
 }
 
 

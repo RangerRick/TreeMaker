@@ -5,7 +5,7 @@ Purpose:      Header file for dangle-proof array of pointers
 Author:       Robert J. Lang
 Modified by:  
 Created:      2003-11-15
-Copyright:    ©2003 Robert J. Lang. All Rights Reserved.
+Copyright:    ï¿½2003 Robert J. Lang. All Rights Reserved.
 *******************************************************************************/
 
 #ifndef _TMDPPTRARRAY_H_
@@ -240,7 +240,7 @@ referencing it
 template <class T>
 void tmDpptrArray<T>::union_with(T* pt)
 {
-  if (!contains(pt)) push_back(pt);
+  if (!this->contains(pt)) push_back(pt);
 }
 
 
@@ -250,7 +250,7 @@ Remove all copies of this item from the list.
 template <class T>
 void tmDpptrArray<T>::erase_remove(T* pt)
 {
-  if (contains(pt)) {
+  if (this->contains(pt)) {
     tmArray<T*>::erase_remove(pt);
     DstRemoveMeAsDpptrSrc(pt);
   };
@@ -266,7 +266,7 @@ void tmDpptrArray<T>::replace_with(T*& told, T*& tnew)
   if (told == tnew) return;
   iterator p = this->begin();
   bool removedMe = false;
-  while ((p = find(p, this->end(), told)) != this->end()) {
+  while ((p = std::find(p, this->end(), told)) != this->end()) {
     if (!removedMe) {
       DstRemoveMeAsDpptrSrc(*p);
       removedMe = true;
