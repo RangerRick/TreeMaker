@@ -10,6 +10,7 @@ Copyright:    �2003 Robert J. Lang. All Rights Reserved.
 
 #include "tmwxDoc.h"
 #include "tmModel.h"
+#include <memory>
 #include "tmwxStr.h"
 #include "tmwxView.h"
 #include "tmwxInspectorFrame.h"
@@ -302,7 +303,7 @@ Read the object from a (file) stream.
 tmwxDoc::tmwxInputStream& tmwxDoc::LoadObject(tmwxInputStream& stream)
 {
   wxDocument::LoadObject(stream);
-  tmTree* theTree = new tmTree();
+  std::unique_ptr<tmTree> theTree(new tmTree());
   try {
     theTree->GetSelf(stream);
   }
@@ -317,21 +318,13 @@ tmwxDoc::tmwxInputStream& tmwxDoc::LoadObject(tmwxInputStream& stream)
         wxT("There was one unrecognized condition. It will be ignored."));
     else
       msg.Printf(
-        wxT("There were %s unrecognized conditions. They will be ignored."), 
+        wxT("There were %s unrecognized conditions. They will be ignored."),
           tmwxStr(exc.mNumMissed).c_str());
     tmwxAlertInfo(msg, msgTitle, GetDocumentWindow());
     // continue as if we were successful.
   }
-  // Note: GetSelf() could throw other exceptions if the stream contained
-  // corrupted data. If that happens, theTree can be in an unspecified
-  // partially-built state. If that occurs, we'll abandon it. This creates a
-  // memory leak, but at the moment, the Put/Get routines don't clean up memory
-  // when they throw an exception. Sometime in the future we'll have to rewrite
-  // all of the Put/Get routines so that they clean up properly. But if no
-  // exceptions were thrown, we can safely replace the existing tree with the
-  // read-in one.
   delete mTree;
-  mTree = theTree;
+  mTree = theTree.release();
   mCleanState.str("");
   mTree->PutSelf(mCleanState);
   return stream;
